@@ -5,6 +5,9 @@ permissions:
   - action: edit
     resource: "*"
     effect: deny
+  - action: edit
+    resource: "docs/quality/audits/**"
+    effect: allow
   - action: shell
     resource: "git commit *"
     effect: deny

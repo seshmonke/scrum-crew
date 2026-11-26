@@ -169,8 +169,9 @@ Close: все задачи `[x]`, `verify` зелёный, changes заархи�
 Нет условий — одна строка `No audit: insufficient material` и стоп.
 Никаких выводов на пустоте.
 
-Read-only. 1–3 находки: доказательство, root cause, proposal, owner,
-метрика. Отчёт — `docs/quality/audits/NN-*.md` по `assets/audit.md`.
+Read-only к коду/скиллу/спекам; единственная запись — отчёт. 1–3 находки:
+доказательство, root cause, proposal, owner, метрика. Отчёт —
+`docs/quality/audits/NN-*.md` по `assets/audit.md`.
 Изменения — через ADR/PR, не в спринте. Нет эффекта два аудита — удалить
 роль. Подробно — `references/audit.md`.
 
