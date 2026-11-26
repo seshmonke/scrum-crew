@@ -96,20 +96,29 @@ openspec/changes/42-guest-checkout/tasks.md
 
 ---
 
-## 3. Установка (Windows + OpenCode)
+## 3. Установка (Windows / Ubuntu + OpenCode)
 
 ### 3.1. CLI
 
 Вариант A, standalone (рекомендуется, не зависит от Node):
+
+Windows:
 
 ```powershell
 irm https://openspec.dev/cli/install.ps1 | iex
 openspec --version
 ```
 
+Ubuntu / macOS:
+
+```bash
+curl -fsSL https://openspec.dev/cli/install.sh | sh
+openspec --version
+```
+
 Вариант B, npm (нужен Node.js ≥ 22.20.0):
 
-```powershell
+```bash
 node --version
 npm install -g @fission-ai/openspec@latest
 openspec --version
@@ -120,7 +129,7 @@ openspec --version
 
 ### 3.2. Инициализация проекта
 
-```powershell
+```bash
 cd <корень-репозитория>
 openspec init --tools opencode --scope project
 ```

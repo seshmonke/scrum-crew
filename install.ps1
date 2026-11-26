@@ -17,7 +17,7 @@ $opencode = Join-Path $targetPath ".opencode"
 New-Item -ItemType Directory -Force -Path $opencode | Out-Null
 Copy-Item (Join-Path $root ".opencode\*") $opencode -Recurse -Force
 
-Write-Host "Installed skill: $opencode\skills\scrum-team"
+Write-Host "Installed skill: $opencode\skills\sprint-crew"
 Write-Host "Installed agents: $opencode\agents"
 
 # 2. Optional project scaffold, never overwrite
@@ -44,4 +44,4 @@ Write-Host ""
 Write-Host "Next:"
 Write-Host "  cd `"$targetPath`""
 Write-Host "  openspec init --tools opencode --scope project"
-Write-Host "  then in OpenCode: initialize the project via scrum-team"
+Write-Host "  then in OpenCode: initialize the project via sprint-crew"

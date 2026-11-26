@@ -21,14 +21,14 @@
 4. Создать первый OpenSpec change — walking skeleton.
 5. Только после этого — команда на Sprint 1.
 
-Подробно — скилл `scrum-team`, `references/init.md`.
+Подробно — скилл `sprint-crew`, `references/init.md`.
 
 ## С чего начинать
 
 1. Если проект новый — сначала Init, потом спринт.
 2. Прочитать `docs/tasks/INDEX.md` — направление и бэклог.
 3. Прочитать `docs/quality/dod.md` — что считается Done.
-4. Для спринта — загрузить скилл `scrum-team` и следовать ему.
+4. Для спринта — загрузить скилл `sprint-crew` и следовать ему.
 5. Для изменения поведения — OpenSpec change, а не прямая правка
    `openspec/specs/`.
 

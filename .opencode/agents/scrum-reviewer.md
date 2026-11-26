@@ -21,8 +21,8 @@ permissions:
 Прочитай:
 - `AGENTS.md`
 - `docs/quality/dod.md`
-- `.opencode/skills/scrum-team/references/openspec.md`
-- `.opencode/skills/scrum-team/references/git-quality.md`
+- `.opencode/skills/sprint-crew/references/openspec.md`
+- `.opencode/skills/sprint-crew/references/git-quality.md`
 - change, `task.md`, diff, тесты
 
 Проверь:

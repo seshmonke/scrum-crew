@@ -145,7 +145,7 @@ hell.
 **Почему:** методология должна переиспользоваться в новых проектах, а не
 жить в одном репозитории.
 **Последствия:** скилл и агенты лежат в
-[seshmonke/scrum-team-skill](https://github.com/seshmonke/scrum-team-skill);
+[seshmonke/sprint-crew](https://github.com/seshmonke/sprint-crew);
 установка — `install.cmd` / `install.ps1` / `install.sh`; каркас проекта —
 в `template/`. Версия v0.1.0.
 
@@ -164,9 +164,9 @@ hell.
 ## Реализация v0.1
 
 ```
-.opencode/skills/scrum-team/SKILL.md
-.opencode/skills/scrum-team/references/*.md
-.opencode/skills/scrum-team/assets/*.md
+.opencode/skills/sprint-crew/SKILL.md
+.opencode/skills/sprint-crew/references/*.md
+.opencode/skills/sprint-crew/assets/*.md
 .opencode/agents/scrum-orchestrator.md
 .opencode/agents/scrum-worker.md
 .opencode/agents/scrum-reviewer.md
