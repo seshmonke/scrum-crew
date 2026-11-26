@@ -28,6 +28,11 @@ behavior-changing PBI, `owns:`, evidence, «Проверка владельце�
 Выход: Goal, Sprint Backlog, changes, риски, evidence-формат.
 Направление пусто — стоп и вопрос.
 
+Если PBI касается запуска, контента, поддержки или легала — активировать
+on-demand шляпу **только на этот PBI**: Growth/Content, Support/Community
+или Legal/Privacy. Они не входят в дейли, не имеют своего бэклога; задачи
+идут через PO. Legal может наложить вето на релиз.
+
 ## Дейлик
 
 До синка — `assets/daily.md`, 3 строки от активных.

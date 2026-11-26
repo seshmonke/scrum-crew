@@ -204,8 +204,10 @@ architect). Постоянная роль владеет зоной и ревь�
 | **Technical Writer** | docs-as-code, release notes, onboarding | с Delivery |
 | **Integration Captain** | последовательный мерж, intent-конфликты, rebase | с SM или Architect |
 | **Support / On-call** | реальные баги в бэклог | ротация |
+| **Growth / Content** | запуск, контент, SEO, кампании | on-demand шляпа, не постоянное место |
+| **Support / Community** | тикеты, отзывы, churn | on-demand шляпа |
+| **Legal / Privacy** | cookies, GDPR, DPA, лицензии; вето на релиз | on-demand шляпа, не замена юристу |
 | **Methodology Auditor** | аудит методологии по логам и метрикам; только при материалах | отдельная on-demand роль |
-| **Legal / Privacy** | cookies, GDPR, DPA, лицензии | по вызову |
 | **Localization** | i18n, если нужен | по вызову |
 
 Практическое правило: **больше 7 активных голосов в одной церемонии —

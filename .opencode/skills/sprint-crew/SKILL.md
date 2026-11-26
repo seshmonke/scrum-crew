@@ -51,12 +51,23 @@ PO, SM, Architect, Fullstack, Frontend, Backend, Data, QA, Tester,
 DevSecOps, White Hacker, Designer, User Proxy, Delivery, Methodology
 Auditor (on-demand) + worker.
 
+On-demand hats: **Growth / Content**, **Support / Community**,
+**Legal / Privacy**.
+
 Правила:
 - Роль — шляпа, не отдельный репозиторий и не свой бэклог.
 - Постоянная роль владеет зоной; на задачу поднимается worker.
 - Один owner на задачу; остальные — reviewer/consultant.
 - Автор не ревьюит себя и не мержит свой PR.
 - User Proxy без права вето; White Hacker — вето только на security.
+
+### On-demand hats
+
+Growth / Content, Support / Community, Legal / Privacy не входят в
+постоянный состав. Активируются только под PBI, который касается их
+домена. Нет дейли, нет своего бэклога, нет отдельного репо. Задачи — в
+общий бэклог через PO. Legal имеет вето на релиз при нарушении закона или
+приватности; это не замена юристу.
 
 ## 3. Цикл
 
