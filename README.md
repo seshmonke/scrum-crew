@@ -4,7 +4,7 @@
 Одна команда, 12+ ролей, спринт 4–8 часов, OpenSpec для поведения,
 монорепозиторий, последовательный merge train.
 
-Статус: **v0.1**. Продукт и стек не входят — они определяются на стадии
+Статус: **v0.2**. Продукт и стек не входят — они определяются на стадии
 Init в каждом проекте.
 
 ## Что даёт
@@ -22,6 +22,8 @@ Init в каждом проекте.
   czar и circuit breaker.
 - **Связь:** структурированная шина + sync/focus, design council на
   развилках, continuous только для инцидентов.
+- **Аудит методологии:** on-demand мета-роль, только при наличии
+  материалов; 1–3 системные находки, read-only, изменения через ADR/PR.
 - **Безопасность:** автор ≠ ревьюер, least privilege, нет прод-доступа,
   гейты командами, а не мнениями.
 
@@ -121,19 +123,21 @@ openspec init --tools opencode --scope project
     references/
       init.md             # стадия 0: продукт, стек, delivery
       scrum.md            # правила и артефакты
-      roles.md            # 14 карточек ролей
+      roles.md            # 14 ролей + аудитор
       cycle.md            # церемонии и шаги
       orchestrator.md     # состояние, диспатч, merge train
       communication.md    # шина и протоколы
       openspec.md         # change-поток и гейты
       git-quality.md      # ветки, PR, безопасность, a11y/perf
       failure-modes.md    # сбои и восстановление
-    assets/               # sprint, daily, review, retro, task, handoff, pr
+      audit.md            # мета-аудит: готовность, скоринг, находки
+    assets/               # sprint, daily, review, retro, task, handoff, pr, audit
   agents/
     scrum-orchestrator.md
     scrum-worker.md
     scrum-reviewer.md
     scrum-security-reviewer.md
+    scrum-methodology-auditor.md
 template/                  # каркас проекта для Init
 docs/                      # дизайн методологии и 100 источников
 install.ps1
@@ -173,6 +177,19 @@ PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CLOSED
 | Designer | UX/UI, дизайн-система, a11y |
 | User Proxy | персоны, сценарии, гипотезы |
 | Delivery / PM | зависимости, риски, релизы |
+| Methodology Auditor | качество методологии; on-demand, только при материалах |
+
+## Аудит методологии
+
+Запускается вручную («аудит методологии») или после 3-го закрытого
+спринта. Сначала проверяет готовность:
+
+- **pilot:** ≥ 1 спринт, ≥ 5 merged задач, есть retro и метрики;
+- **full:** ≥ 3 спринта, ≥ 20 merged, ≥ 20 событий, 2+ ретро.
+
+Нет материалов — `No audit: insufficient material`, отчёт не создаётся.
+Read-only; 1–3 находки с доказательством, root cause, owner и метрикой;
+изменения — через ADR/PR. Нет эффекта два аудита — роль удаляется.
 
 ## Принципы
 
@@ -189,13 +206,16 @@ PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CLOSED
 Скилл прошёл Raptor-рефакторинг: вопрос требований → удаление →
 упрощение → ускорение → автоматизация.
 
-| Метрика | До | После |
+| Метрика | До Raptor | v0.2 |
 |---|---:|---:|
-| Файлов | 21 | 17 |
-| Строк | 1406 | 1272 |
-| Слов | 7909 | 7346 |
-| SKILL.md | 180 | 135 |
+| Файлов | 21 | 19 |
+| Строк | 1406 | 1417 |
+| Слов | 7909 | 8275 |
+| SKILL.md | 180 | 150 |
 | Шаблонов | 11 | 7 |
+
+Масса почти не выросла, хотя добавлены Init и мета-аудит; SKILL и число
+шаблонов сокращены. Подробности — `docs/RAPTOR-SKILL.md`.
 
 Подробности — `docs/RAPTOR-SKILL.md`.
 

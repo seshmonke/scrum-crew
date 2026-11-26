@@ -41,6 +41,10 @@
     `proposal.md`, delta specs, `design.md`, `tasks.md`. Ревью намерения до
     кода, архив после merge, `openspec/specs/` — чистовик поведения.
     Детали — `OPENSPEC.md`.
+11. **Мета-роль аудита — on-demand.** Methodology Auditor анализирует
+    качество методологии по логам, метрикам и ретро, только при наличии
+    материалов; read-only, 1–3 находки, изменения через ADR/PR. Детали —
+    `.opencode/skills/sprint-crew/references/audit.md`.
 
 ---
 
@@ -200,6 +204,7 @@ architect). Постоянная роль владеет зоной и ревь�
 | **Technical Writer** | docs-as-code, release notes, onboarding | с Delivery |
 | **Integration Captain** | последовательный мерж, intent-конфликты, rebase | с SM или Architect |
 | **Support / On-call** | реальные баги в бэклог | ротация |
+| **Methodology Auditor** | аудит методологии по логам и метрикам; только при материалах | отдельная on-demand роль |
 | **Legal / Privacy** | cookies, GDPR, DPA, лицензии | по вызову |
 | **Localization** | i18n, если нужен | по вызову |
 

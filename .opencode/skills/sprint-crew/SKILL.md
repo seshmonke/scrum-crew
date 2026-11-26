@@ -14,6 +14,7 @@ description: Ведёт веб-разработку по Scrum командой 
 |---|---|---|
 | Init | «инициализируй проект» | продукт → стек → delivery → walking skeleton |
 | Sprint | «запусти спринт» | планирование → сборка → review → retro |
+| Audit | «аудит методологии» | quality of process, только при наличии материалов |
 | Single task | обычная задача | без спринта, по правилам проекта |
 
 Пока Init не закрыт, спринт не начинается.
@@ -47,7 +48,8 @@ description: Ведёт веб-разработку по Scrum командой 
 14 карточек — `references/roles.md`.
 
 PO, SM, Architect, Fullstack, Frontend, Backend, Data, QA, Tester,
-DevSecOps, White Hacker, Designer, User Proxy, Delivery + worker.
+DevSecOps, White Hacker, Designer, User Proxy, Delivery, Methodology
+Auditor (on-demand) + worker.
 
 Правила:
 - Роль — шляпа, не отдельный репозиторий и не свой бэклог.
@@ -155,6 +157,23 @@ Close: все задачи `[x]`, `verify` зелёный, changes заархи�
 
 Вопрос: `.scrum/questions/NN.md` + уведомление, завершить ход.
 
+## 10.1. Аудит методологии
+
+Триггер: «аудит методологии» или после 3-го закрытого спринта.
+Запускать только при материалах:
+
+- **pilot:** ≥ 1 закрытый спринт, ≥ 5 merged задач, есть `retro.md` и
+  метрики;
+- **full:** ≥ 3 спринта, ≥ 20 merged, ≥ 20 событий, 2+ ретро.
+
+Нет условий — одна строка `No audit: insufficient material` и стоп.
+Никаких выводов на пустоте.
+
+Read-only. 1–3 находки: доказательство, root cause, proposal, owner,
+метрика. Отчёт — `docs/quality/audits/NN-*.md` по `assets/audit.md`.
+Изменения — через ADR/PR, не в спринте. Нет эффекта два аудита — удалить
+роль. Подробно — `references/audit.md`.
+
 ## 11. Куда писать
 
 | Что | Куда |
@@ -178,10 +197,11 @@ Close: все задачи `[x]`, `verify` зелёный, changes заархи�
 - [ ] Мерж последовательный; main зелёный.
 - [ ] Change заархивирован; спека обновлена.
 - [ ] Дейлик, review, retro записаны.
+- [ ] После 3-го спринта — аудит методологии, если есть материалы.
 - [ ] Следующий спринт не начат без команды.
 
 ## 13. Файлы
 
 `references/`: init, scrum, roles, cycle, orchestrator, communication,
-openspec, git-quality, failure-modes.
-`assets/`: sprint, daily, review, retro, task, handoff, pr.
+openspec, git-quality, failure-modes, audit.
+`assets/`: sprint, daily, review, retro, task, handoff, pr, audit.

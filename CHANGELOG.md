@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2 — 2026-11-26
+
+- Добавлена мета-роль **Methodology Auditor** (on-demand, read-only).
+- Аудит запускается только при наличии материалов: pilot / full,
+  иначе `No audit: insufficient material`.
+- 1–3 находки с доказательством, root cause, owner и метрикой.
+- Отчёты — `docs/quality/audits/`; изменения через ADR/PR.
+- Kill criteria: нет эффекта два аудита — роль удаляется.
+- Raptor generation 2: +2 файла, +145 строк, SKILL 135 → 150.
+
 ## v0.1 — 2026-11-26
 
 - Первый публичный скилл Scrum-команды агентов.
