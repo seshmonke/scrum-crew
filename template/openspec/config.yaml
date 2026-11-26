@@ -1,0 +1,38 @@
+schema: spec-driven
+
+# Project context (optional)
+context: |
+  Пиши артефакты OpenSpec по-русски; код и идентификаторы — по-английски.
+  Один change = один PBI. Имя change: <номер-задачи>-<краткое-имя>.
+  Не редактируй openspec/specs/ в ветке фичи: только archive после merge.
+  Одна capability — один активный change на волну.
+  Поведение, которое видит пользователь или потребитель API, требует change.
+  Багфикс, рефакторинг без изменения поведения, инфра и косметика — без change,
+  с одной строкой причины в PR.
+  Definition of Ready и Definition of Done: docs/quality/dod.md.
+
+# Per-artifact rules (optional)
+rules:
+  proposal:
+    - "Явно указывай non-goals и метрику успеха."
+    - "Ссылайся на docs/concept/ и docs/stack/, не дублируй их."
+  specs:
+    - "Каждый requirement содержит минимум один Scenario с наблюдаемым THEN."
+    - "Покрой happy path, ошибку и крайний случай."
+  design:
+    - "Пиши только если меняются контракт, схема, authz, деньги или PII."
+  tasks:
+    - "Только чекбоксы вида '- [ ] 1.1 ...'; без прозы вместо задач."
+    - "Одна задача — один проверяемый результат."
+
+# Per-operation guidance (optional)
+operations:
+  apply:
+    guidance:
+      - "Работай только по tasks.md и только в границах change."
+      - "При дыре в спеке — стоп, #spec, решение, повторный review."
+      - "Не меняй openspec/specs/ и не архивируй change."
+  archive:
+    guidance:
+      - "Архивируй только после merge и зелёного CI."
+      - "После архивации запусти openspec validate --all --strict."

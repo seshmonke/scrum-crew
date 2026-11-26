@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "sprint_limit_usd": null,
+  "sprint_limit_tokens": null,
+  "spent_usd": 0,
+  "spent_tokens": 0,
+  "by_role": {},
+  "policy": {
+    "soft_stop_at": 0.7,
+    "finish_only_at": 0.9,
+    "hard_stop_at": 1.0
+  }
+}

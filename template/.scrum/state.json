@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "phase": "INIT",
+  "sprint": null,
+  "cycle": 0,
+  "updated_at": "2026-11-26T00:00:00Z",
+  "stop": false,
+  "human_gate": null,
+  "notes": "Заполняется оркестратором. Продукт и спринт ещё не выбраны."
+}
