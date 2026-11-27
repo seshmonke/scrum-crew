@@ -145,7 +145,7 @@ hell.
 **Почему:** методология должна переиспользоваться в новых проектах, а не
 жить в одном репозитории.
 **Последствия:** скилл и агенты лежат в
-[seshmonke/sprint-crew](https://github.com/seshmonke/sprint-crew);
+[seshmonke/scrum-crew](https://github.com/seshmonke/scrum-crew);
 установка — `install.cmd` / `install.ps1` / `install.sh`; каркас проекта —
 в `template/`. Версия v0.1.0.
 
@@ -178,6 +178,21 @@ COO — Delivery, коммерция — PO + владелец. Если шля�
 
 ---
 
+## D16. Переименование скилла и репозитория в Scrum Crew
+
+**Статус:** принято.
+**Почему:** `scrum-crew` короче, выравнивает ID скилла с агентами
+`scrum-*` и лучше рифмуется за счёт повтора `cr`.
+**Последствия:** каталог скилла — `.opencode/skills/scrum-crew/`,
+skill-id — `scrum-crew`, заголовок — «Scrum Crew»; репозиторий —
+[seshmonke/scrum-crew](https://github.com/seshmonke/scrum-crew)
+(GitHub редиректит старый URL). Старая команда «через sprint-crew»
+остаётся legacy-триггером на один релиз. Установленные проекты должны
+удалить `.opencode/skills/sprint-crew/`. Раскатка новой версии на
+проекты — после завершения всех текущих планов по скиллу.
+
+---
+
 ## Решено при сборке v0.1
 
 1. **Archive timing.** После merge, отдельным PR в конце цикла.
@@ -191,9 +206,9 @@ COO — Delivery, коммерция — PO + владелец. Если шля�
 ## Реализация v0.1
 
 ```
-.opencode/skills/sprint-crew/SKILL.md
-.opencode/skills/sprint-crew/references/*.md
-.opencode/skills/sprint-crew/assets/*.md
+.opencode/skills/scrum-crew/SKILL.md
+.opencode/skills/scrum-crew/references/*.md
+.opencode/skills/scrum-crew/assets/*.md
 .opencode/agents/scrum-orchestrator.md
 .opencode/agents/scrum-worker.md
 .opencode/agents/scrum-reviewer.md

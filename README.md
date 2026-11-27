@@ -1,4 +1,4 @@
-# Sprint Crew
+# Scrum Crew
 
 Переиспользуемая методология Scrum-команды агентов для веб-разработки.
 Одна команда, 12+ ролей, спринт 4–8 часов, OpenSpec для поведения,
@@ -42,16 +42,16 @@ Init в каждом проекте.
 ### Windows
 
 ```powershell
-git clone https://github.com/seshmonke/sprint-crew.git
+git clone https://github.com/seshmonke/scrum-crew.git
 cd C:\path\to\your-project
-C:\path\to\sprint-crew\install.cmd -Target .
+C:\path\to\scrum-crew\install.cmd -Target .
 ```
 
 С каркасом проекта (только в пустой проект, существующие файлы не
 перезаписываются):
 
 ```powershell
-C:\path\to\sprint-crew\install.cmd -Target . -WithScaffold
+C:\path\to\scrum-crew\install.cmd -Target . -WithScaffold
 ```
 
 `install.cmd` обходит ExecutionPolicy только для этого запуска. Прямой
@@ -66,10 +66,10 @@ Ubuntu 22.04+ и macOS. Нужны `git`, `curl`, `bash`.
 curl -fsSL https://openspec.dev/cli/install.sh | sh
 
 # 2. Скилл
-git clone https://github.com/seshmonke/sprint-crew.git
+git clone https://github.com/seshmonke/scrum-crew.git
 cd /path/to/your-project
-chmod +x /path/to/sprint-crew/install.sh
-/path/to/sprint-crew/install.sh . --with-scaffold
+chmod +x /path/to/scrum-crew/install.sh
+/path/to/scrum-crew/install.sh . --with-scaffold
 ```
 
 `install.sh` — bash-скрипт, работает на Ubuntu без PowerShell. Если
@@ -78,8 +78,22 @@ chmod +x /path/to/sprint-crew/install.sh
 
 ### Вручную
 
-Скопировать `.opencode/skills/sprint-crew/` и `.opencode/agents/scrum-*.md`
+Скопировать `.opencode/skills/scrum-crew/` и `.opencode/agents/scrum-*.md`
 в `.opencode/` проекта.
+
+### Миграция с `sprint-crew`
+
+Репозиторий и скилл переименованы в `scrum-crew`. Старые ссылки на
+GitHub редиректятся, но установленную копию нужно обновить вручную:
+
+1. Обновите скилл из репозитория.
+2. Удалите старую папку `.opencode/skills/sprint-crew/`, иначе OpenCode
+   увидит две версии скилла.
+3. Команда «через sprint-crew» пока принимается как legacy; новая —
+   «через scrum-crew».
+
+Новая версия раскатывается на проекты после завершения текущих планов
+по скиллу.
 
 ## Первый запуск
 
@@ -100,7 +114,7 @@ openspec init --tools opencode --scope project
 В чате OpenCode:
 
 ```text
-инициализируй проект через sprint-crew
+инициализируй проект через scrum-crew
 ```
 
 Скилл проведёт через стадию Init:
@@ -113,14 +127,14 @@ openspec init --tools opencode --scope project
 Затем:
 
 ```text
-запусти спринт через sprint-crew
+запусти спринт через scrum-crew
 ```
 
 ## Структура
 
 ```
 .opencode/
-  skills/sprint-crew/
+  skills/scrum-crew/
     SKILL.md              # вход: режимы, цикл, гейты
     references/
       init.md             # стадия 0: продукт, стек, delivery

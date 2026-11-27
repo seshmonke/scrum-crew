@@ -21,7 +21,7 @@
 ## Формат
 
 `NN-YYYY-MM-DD.md` по шаблону
-`.opencode/skills/sprint-crew/assets/audit.md`.
+`.opencode/skills/scrum-crew/assets/audit.md`.
 
 - максимум 3 находки;
 - каждая с доказательством, root cause, proposal, owner, метрикой;

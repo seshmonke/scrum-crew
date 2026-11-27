@@ -17,8 +17,15 @@ $opencode = Join-Path $targetPath ".opencode"
 New-Item -ItemType Directory -Force -Path $opencode | Out-Null
 Copy-Item (Join-Path $root ".opencode\*") $opencode -Recurse -Force
 
-Write-Host "Installed skill: $opencode\skills\sprint-crew"
+Write-Host "Installed skill: $opencode\skills\scrum-crew"
 Write-Host "Installed agents: $opencode\agents"
+
+$oldSkill = Join-Path $opencode "skills\sprint-crew"
+if (Test-Path $oldSkill) {
+    Write-Host ""
+    Write-Host "Warning: old skill found: $oldSkill"
+    Write-Host "Remove it to avoid two versions of the skill."
+}
 
 # 2. Optional project scaffold, never overwrite
 if ($WithScaffold) {
@@ -44,4 +51,4 @@ Write-Host ""
 Write-Host "Next:"
 Write-Host "  cd `"$targetPath`""
 Write-Host "  openspec init --tools opencode --scope project"
-Write-Host "  then in OpenCode: initialize the project via sprint-crew"
+Write-Host "  then in OpenCode: initialize the project via scrum-crew"

@@ -27,8 +27,8 @@ permissions:
 
 Прочитай:
 - `AGENTS.md`
-- `.opencode/skills/sprint-crew/references/audit.md`
-- `.opencode/skills/sprint-crew/references/roles.md` — свою карточку
+- `.opencode/skills/scrum-crew/references/audit.md`
+- `.opencode/skills/scrum-crew/references/roles.md` — свою карточку
 - `.scrum/events.jsonl`, `board.json`, `state.json`
 - `.scrum/sprints/*/` — sprint, daily, review, retro, evidence
 - `docs/tasks/*.md`, `docs/quality/audits/`

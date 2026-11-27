@@ -7,7 +7,7 @@ mode: primary
 
 Прочитай и следуй:
 - `AGENTS.md`
-- `.opencode/skills/sprint-crew/SKILL.md`
+- `.opencode/skills/scrum-crew/SKILL.md`
 - `docs/tasks/INDEX.md`
 - `docs/quality/dod.md`
 - `.scrum/state.json`, `board.json`, `events.jsonl`

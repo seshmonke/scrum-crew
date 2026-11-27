@@ -1,4 +1,4 @@
-# Sprint Crew для агентов — дизайн v0.1
+# Scrum Crew для агентов — дизайн v0.1
 
 Статус: **на утверждение**. Скилл ещё не собран.
 Входные решения владельца: полный автопилот, спринт = одна сессия 4–8 ч
@@ -44,7 +44,7 @@
 11. **Мета-роль аудита — on-demand.** Methodology Auditor анализирует
     качество методологии по логам, метрикам и ретро, только при наличии
     материалов; read-only, 1–3 находки, изменения через ADR/PR. Детали —
-    `.opencode/skills/sprint-crew/references/audit.md`.
+    `.opencode/skills/scrum-crew/references/audit.md`.
 
 ---
 
@@ -108,7 +108,7 @@ Init — не спринт и не «sprint 0». Это отдельная ст�
 
 Гейт: владелец подтвердил Goal, сценарий, метрику и non-goals; `verify`
 работает; preview открывается; первый change создан. Только после этого —
-Sprint 1. Подробно — `.opencode/skills/sprint-crew/references/init.md`.
+Sprint 1. Подробно — `.opencode/skills/scrum-crew/references/init.md`.
 
 ---
 
@@ -419,7 +419,7 @@ White Hacker — abuse cases; Designer — UX-риски. Синк только 
 
 ```
 .opencode/
-  skills/sprint-crew/          # методология, роли, шаблоны
+  skills/scrum-crew/          # методология, роли, шаблоны
   agents/scrum/*.md           # 12+ субагентов с правами
 .scrum/
   state.json                  # текущее состояние (single writer: оркестратор)
@@ -677,7 +677,7 @@ KPI.
 ## 11. Скилл: как это будет собрано
 
 ```
-.opencode/skills/sprint-crew/
+.opencode/skills/scrum-crew/
   SKILL.md                    # < 500 строк: триггеры, цикл, правила, стопы
   references/
     scrum.md                  # правила, церемонии, артефакты

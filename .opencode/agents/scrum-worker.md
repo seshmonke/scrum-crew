@@ -29,9 +29,9 @@ permissions:
 
 Прочитай:
 - `AGENTS.md`
-- `.opencode/skills/sprint-crew/references/roles.md` — свою роль
-- `.opencode/skills/sprint-crew/references/communication.md`
-- `.opencode/skills/sprint-crew/references/openspec.md`
+- `.opencode/skills/scrum-crew/references/roles.md` — свою роль
+- `.opencode/skills/scrum-crew/references/communication.md`
+- `.opencode/skills/scrum-crew/references/openspec.md`
 - `task.md` и контракты, которые передал оркестратор
 
 Работай только в `owns:` и только по AC. Не мержи, не пушь в main, не

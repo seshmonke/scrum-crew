@@ -24,8 +24,14 @@ TARGET="$(cd "$TARGET" && pwd)"
 mkdir -p "$TARGET/.opencode"
 cp -R "$ROOT/.opencode/." "$TARGET/.opencode/"
 
-echo "Installed skill: $TARGET/.opencode/skills/sprint-crew"
+echo "Installed skill: $TARGET/.opencode/skills/scrum-crew"
 echo "Installed agents: $TARGET/.opencode/agents"
+
+if [ -d "$TARGET/.opencode/skills/sprint-crew" ]; then
+  echo ""
+  echo "Warning: old skill found: $TARGET/.opencode/skills/sprint-crew"
+  echo "Remove it to avoid two versions of the skill."
+fi
 
 if [ "$WITH_SCAFFOLD" -eq 1 ]; then
   cd "$ROOT/template"
@@ -46,7 +52,7 @@ echo ""
 echo "Next:"
 echo "  cd \"$TARGET\""
 echo "  openspec init --tools opencode --scope project"
-echo "  then in OpenCode: initialize the project via sprint-crew"
+echo "  then in OpenCode: initialize the project via scrum-crew"
 
 if ! command -v openspec >/dev/null 2>&1; then
   echo ""
