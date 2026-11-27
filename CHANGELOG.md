@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.4.0 — 2026-11-27
+
+- **Breaking:** скилл и репозиторий переименованы в `scrum-crew` /
+  «Scrum Crew»; skill-id `sprint-crew`, папка
+  `.opencode/skills/sprint-crew/` и старый URL больше не используются.
+  Миграция — README/D16; команда «через sprint-crew» остаётся
+  legacy-триггером на один релиз.
+- Tier + TDD/ATDD: Tier PBI, RED-evidence, ATDD test plan, T2-артефакты.
+- T2-глубина: владельцы практик, threat model/contract/SLO,
+  evidence-check в merge train.
+- Quality waves, debt budget, postmortems и метрики внедрения.
+- Инструкция обновления существующих проектов: `references/upgrade.md`,
+  `VERSION`, режим Upgrade; только между спринтами, отдельным PR, через
+  установщик без `--with-scaffold`.
+- `docs/evidence/SKILL-METHODOLOGY.md`: gap-аудит и проверки.
+
 ## v0.3.0 — 2026-11-26
 
 - Добавлены on-demand шляпы: Growth / Content, Support / Community,
