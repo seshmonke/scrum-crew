@@ -20,6 +20,15 @@
 - Design:
 - User Proxy (hypothesis):
 
+## Вердикт Methodology
+
+- TDD/ATDD:
+- T2-артефакты:
+- Долг:
+- Postmortem:
+- Исключения:
+Вердикт: PASS / REQUEST_CHANGES
+
 ## Решение PO
 
 ACCEPT / REJECT

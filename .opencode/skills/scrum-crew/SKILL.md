@@ -37,8 +37,8 @@ description: Ведёт веб-разработку по Scrum командой 
 
 ## 1. Прочитать до спринта
 
-`AGENTS.md` → `docs/tasks/INDEX.md` → `docs/quality/dod.md` →
-`openspec list` → `.scrum/state.json` → `verify`.
+`AGENTS.md` → `docs/tasks/INDEX.md` → `docs/quality/methodologies.md` →
+`docs/quality/dod.md` → `openspec list` → `.scrum/state.json` → `verify`.
 
 Чего нет — спросить владельца. Продукт, стек и состав спринта не
 выдумывать.
@@ -80,16 +80,30 @@ PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CLOSED
 
 | Фаза | Гейт |
 |---|---|
-| Planning | Goal в одну фразу, PBI Ready, `openspec validate` |
-| Build | `verify` зелёный, ревью не-автора, main не красный |
-| Review | только Done-инкремент на preview, ACCEPT/REJECT |
-| Retro | 1–2 действия с owner |
-| Close | `verify` + `openspec validate --all --strict` + архив |
+| Planning | Goal, PBI Ready, Tier, `openspec validate` |
+| Build | RED-evidence до кода, `verify`, ревью не-автора, T2-артефакты по волне |
+| Review | только Done на preview, TDD/ATDD/T2-evidence, ACCEPT/REJECT |
+| Retro | 1–2 действия с owner, debt/postmortem actions |
+| Close | `verify` + validate + архив, исключения закрыты |
+
+### Quality waves
+
+Источник — `docs/quality/methodologies.md`.
+
+| Волна | Когда | Что блокирует merge |
+|---|---|---|
+| 1 | сейчас | TDD/ATDD, contract, property, threat model, runbook/rollback; mutation — nightly; SAST — ручной/исключение; SLO-дизайн/логи обязательны, alert/RUM — исключение |
+| 1 | после merge Q1.0–Q1.6 | все T2-гейты; field RUM — исключение до публичного запуска |
+| 2 | Sprint 5–6 | trunk-based + flags, performance/load, полный incident-процесс |
+| 3 | до публичного запуска | IaC + progressive delivery, ASVS/SBOM/DAST, debt-бюджет |
 
 Подробно: `references/cycle.md`.
 
 ## 4. Планирование
 
+0. PO: Tier T0/T1/T2 до оценки и change. Для T1/T2 QA — ATDD
+   happy/error; для T2 Architect — contract/threat model, DevSecOps —
+   SLO/бюджет.
 1. PO: цель из направления + порядок бэклога.
 2. Sprint Goal — один наблюдаемый исход.
 3. PBI, укладывающиеся в 4–6 циклов.
@@ -107,13 +121,16 @@ PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CLOSED
 Волны: контракты → фундамент → вертикальные срезы → полировка.
 
 На задачу:
-1. Worktree + `task.md` (`assets/task.md`).
+0. RED до кода: тест на AC/дефект падает по ожидаемой причине.
+1. Worktree + `task.md` с Tier, артефактами и RED-требованием.
 2. Owner-субагент: role card + brief + контракты.
-3. Отчёт: статус, файлы, команды, вывод, блокеры.
+3. Отчёт: статус, файлы, команды, вывод, RED/GREEN, блокеры.
 4. Оркестратор сам прогоняет `verify`.
 5. Reviewer-субагент (не автор).
-6. Rebase → verify → squash-merge → board.
+6. Rebase → verify → evidence check → squash-merge → board.
 7. Снять lease, записать событие.
+
+Мерж без TDD/ATDD-evidence или T2-артефакта текущей волны запрещён.
 
 12 слотов: contract baseline, `owns:`, shared-file czar, contract sentinel,
 batch merge, circuit breaker (15% конфликтов / 30 мин красного main / 8 PR
@@ -127,13 +144,15 @@ batch merge, circuit breaker (15% конфликтов / 30 мин красно�
 
 ## 7. Review, retro, close
 
-Review: демо Done-инкремента, QA прогоняет сценарий, PO — ACCEPT/REJECT,
-специалисты — по строке. REJECT — задачи в бэклог, не переделка спринта.
+Review: демо Done, QA прогоняет ATDD-сценарий; reviewer проверяет, что
+тест падал без кода, и T2-гейты текущей волны. PO — ACCEPT/REJECT,
+специалисты — по строке. REJECT — в бэклог, не переделка спринта.
 
-Retro: 1–2 действия с owner; проверить прошлые действия.
+Retro: 1–2 действия с owner; проверить прошлые действия и postmortem-actions.
 
-Close: все задачи `[x]`, `verify` зелёный, changes заархивированы, CI
-зелёный. Следующий спринт — только по команде.
+Close: задачи `[x]`, `verify`, changes заархивированы, CI зелёный.
+Долг P3 — owner/срок; P0/P1 — postmortem; исключения закрыты или
+просрочены в P1-долг. Следующий спринт — только по команде.
 
 ## 8. OpenSpec
 
@@ -209,6 +228,17 @@ Read-only к коду/скиллу/спекам; единственная зап
 - [ ] Мерж последовательный; main зелёный.
 - [ ] Change заархивирован; спека обновлена.
 - [ ] Дейлик, review, retro записаны.
+- [ ] Tier T0/T1/T2 записан в PBI/change; T0 не требует TDD/ATDD, e2e
+      и OpenSpec archive.
+- [ ] Для T1/T2 есть ATDD happy/error, RED-evidence и e2e главного
+      сценария.
+- [ ] T2: threat model, contract/property, runbook/rollback;
+      SLO-дизайн/логи обязательны; mutation/SAST/alert/RUM — по волне.
+- [ ] Field RUM — owner-исключение до публичного запуска.
+- [ ] Merge без evidence запрещён; «тесты зелёные» без RED не принимаются.
+- [ ] Исключение: owner, причина, срок, артефакт; просрочка → P1-долг.
+- [ ] P3-долг имеет owner/срок; P0/P1 — postmortem.
+- [ ] Активная волна сверена с `docs/quality/methodologies.md`.
 - [ ] После 3-го спринта — аудит методологии, если есть материалы.
 - [ ] Следующий спринт не начат без команды.
 
