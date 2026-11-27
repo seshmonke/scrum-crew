@@ -14,6 +14,7 @@ description: Ведёт веб-разработку по Scrum командой 
 |---|---|---|
 | Init | «инициализируй проект» | продукт → стек → delivery → walking skeleton |
 | Sprint | «запусти спринт» | планирование → сборка → review → retro |
+| Upgrade | «обнови скилл» | версия → changelog → установка → проверка |
 | Audit | «аудит методологии» | quality of process, только при наличии материалов |
 | Single task | обычная задача | без спринта, по правилам проекта |
 
@@ -34,6 +35,18 @@ description: Ведёт веб-разработку по Scrum командой 
 Гейт: владелец подтвердил Goal, сценарий, метрику, non-goals; `verify`
 работает; preview открывается; первый change создан. Только после этого —
 команда на Sprint 1.
+
+## 0.5. Обновление скилла
+
+Не спринт. Триггеры: «обнови скилл», «обнови scrum-crew», «перейди на
+новую версию». Только по команде владельца и между спринтами.
+
+1. Установленная версия — `.opencode/skills/scrum-crew/VERSION`.
+2. Прочитать `references/upgrade.md`.
+3. Гейт: рабочее дерево чистое, спринт закрыт, target — released tag,
+   владелец подтвердил.
+4. Обновление — отдельный PR; `.scrum/`, `openspec/`, `docs/` и код не
+   трогать.
 
 ## 1. Прочитать до спринта
 
@@ -240,10 +253,13 @@ Read-only к коду/скиллу/спекам; единственная зап
 - [ ] P3-долг имеет owner/срок; P0/P1 — postmortem.
 - [ ] Активная волна сверена с `docs/quality/methodologies.md`.
 - [ ] После 3-го спринта — аудит методологии, если есть материалы.
+- [ ] Обновление скилла — отдельным PR между спринтами; `VERSION`
+      совпадает с target.
 - [ ] Следующий спринт не начат без команды.
 
 ## 13. Файлы
 
-`references/`: init, scrum, roles, cycle, orchestrator, communication,
-openspec, git-quality, failure-modes, audit.
+`references/`: init, upgrade, scrum, roles, cycle, orchestrator,
+communication, openspec, git-quality, failure-modes, audit.
 `assets/`: sprint, daily, review, retro, task, handoff, pr, audit.
+`VERSION`: установленная версия скилла.
