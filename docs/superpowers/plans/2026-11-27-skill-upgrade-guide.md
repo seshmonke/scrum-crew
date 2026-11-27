@@ -306,7 +306,7 @@ git commit -m "docs: link upgrade guide from README and template"
 ### Task 5: Проверить upgrade-процедуру
 
 **Files:**
-- Test: временные каталоги в `/tmp/opencode/`
+- Test: временные каталоги в `${TMPDIR:-/tmp}/`
 - No source changes.
 
 **Interfaces:**
@@ -327,26 +327,28 @@ Expected: `v0.3.0` (до релиза v0.4.0).
 - [ ] **Step 2: Смоделировать проект на v0.3.0**
 
 ```bash
-base="$(mktemp -d /tmp/opencode/upgrade-base.XXXXXX)"
+base="$(mktemp -d "${TMPDIR:-/tmp}/upgrade-base.XXXXXX")"
 git clone --depth 1 --branch v0.3.0 https://github.com/seshmonke/scrum-crew.git "$base"
-project="$(mktemp -d /tmp/opencode/upgrade-project.XXXXXX)"
+project="$(mktemp -d "${TMPDIR:-/tmp}/upgrade-project.XXXXXX")"
 "$base/install.sh" "$project"
 test -d "$project/.opencode/skills/sprint-crew"
 mkdir -p "$project/.scrum" "$project/openspec" "$project/docs"
-printf 'state' > "$project/.scrum/state.json"
+printf '{"sprint": null}' > "$project/.scrum/state.json"
 printf 'spec' > "$project/openspec/spec.md"
 printf 'doc' > "$project/docs/keep.md"
+printf '{"skill":{"sprint-crew":true}}' > "$project/opencode.json"
+printf '# AGENTS\n' > "$project/AGENTS.md"
 ```
 
 - [ ] **Step 3: Обновить текущей веткой**
 
 ```bash
-tmp="$(mktemp -d /tmp/opencode/upgrade-current.XXXXXX)"
+tmp="$(mktemp -d "${TMPDIR:-/tmp}/upgrade-current.XXXXXX")"
 cp -R /home/frozenpunk/scrum-crew/.opencode "$tmp/"
 cp -R /home/frozenpunk/scrum-crew/template "$tmp/"
 cp /home/frozenpunk/scrum-crew/install.sh "$tmp/"
-"$tmp/install.sh" "$project" | tee /tmp/opencode/upgrade-install.log
-grep -F "old skill found" /tmp/opencode/upgrade-install.log
+"$tmp/install.sh" "$project" | tee "${TMPDIR:-/tmp}/upgrade-install.log"
+grep -F "old skill found" "${TMPDIR:-/tmp}/upgrade-install.log"
 test -f "$project/.opencode/skills/scrum-crew/VERSION"
 test "$(cat "$project/.opencode/skills/scrum-crew/VERSION")" = "0.4.0-dev"
 rm -rf "$project/.opencode/skills/sprint-crew"
@@ -373,6 +375,19 @@ cd /home/frozenpunk/scrum-crew
 bash -n install.sh
 git diff --check
 ```
+
+- [ ] **Step 6: E2E в temp git repo**
+
+Проверить документированные команды целиком, а не только установщик:
+
+- baseline v0.3.0, sentinels `.scrum/`, `openspec/`, `docs/`;
+- `opencode.json`, `AGENTS.md` и кастомизация в `sprint-crew`;
+- upgrade текущей веткой, проверка `VERSION`, удаление старой папки,
+  `git status --porcelain` allowlist, коммит;
+- `git revert`, проверка одного skill-id и восстановленной кастомизации;
+- проект без `opencode.json`/`AGENTS.md` — условный `git add`.
+
+Expected: все проверки зелёные.
 
 ---
 

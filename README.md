@@ -156,6 +156,7 @@ openspec init --tools opencode --scope project
     VERSION               # установленная версия
     references/
       init.md             # стадия 0: продукт, стек, delivery
+      upgrade.md          # обновление скилла в проекте
       scrum.md            # правила и артефакты
       roles.md            # 14 ролей + аудитор
       cycle.md            # церемонии и шаги
