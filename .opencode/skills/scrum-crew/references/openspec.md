@@ -34,7 +34,7 @@ openspec validate --all --strict
 | PBI | change `<номер>-<краткое>` |
 | Sprint Goal | 1–3 change с одним исходом |
 | Sprint Backlog | `tasks.md` + план спринта |
-| DoR | proposal + specs + сценарии + `validate --strict` |
+| DoR | proposal + Tier + specs + сценарии + `validate --strict` |
 | DoD | `verify-change` + archive + `validate --all` |
 | Increment | архивные changes в `specs/` |
 | Review | diff требований + демо |
@@ -43,12 +43,13 @@ openspec validate --all --strict
 ## Поток
 
 1. **Explore** (опционально): варианты, риски, что неизвестно.
-2. **Propose:** PO — proposal; Architect — design; QA — сценарии;
-   White Hacker — abuse cases; Designer — UX-состояния.
+2. **Propose:** PO — proposal + Tier; Architect — design + contract;
+   QA — ATDD happy/error; White Hacker — threat model/abuse; Designer —
+   UX-состояния.
 3. **Review:** читать proposal → specs → tasks; `validate --strict`;
    spec freeze.
 4. **Apply:** один change на агента/worktree; только `tasks.md`;
-   `specs/` не править.
+   RED-тест и ATDD-сценарий на каждый AC; `specs/` не править.
 5. **Verify:** `verify-change`; каждый сценарий имеет тест или ручное
    доказательство.
 6. **Archive:** после merge, отдельным PR в конце цикла;
@@ -57,17 +58,31 @@ openspec validate --all --strict
 
 ## Definition of Ready
 
-- [ ] proposal: why, what, non-goals, метрика.
+- [ ] proposal: why, what, non-goals, метрика, Tier.
 - [ ] Дельта спеков: SHALL + WHEN/THEN.
 - [ ] Happy path + ошибка/край.
+- [ ] Для T1/T2 ATDD happy/error, RED-тест на каждый AC и e2e главного
+      сценария.
+- [ ] Для T2 `design.md`: threat model, contract-план, SLO/логи;
+      property/mutation — по волне.
+- [ ] T0: `No spec change`; change/archive не требуются.
 - [ ] `design.md`, если контракт/схема/authz/деньги/PII.
 - [ ] `tasks.md` — чекбоксы.
 - [ ] `openspec validate <id> --strict` зелёный.
 - [ ] PO/Architect/QA подтвердили.
 
+В `tasks.md` на каждый AC:
+
+- [ ] RED: тест падает по ожидаемой причине.
+- [ ] GREEN: минимальный код.
+- [ ] ATDD: Given/When/Then, happy/error.
+
 ## Definition of Done
 
 - [ ] Все задачи `[x]`.
+- [ ] TDD/ATDD evidence и e2e главного сценария для T1/T2; T0 — N/A.
+- [ ] T2-гейты текущей волны закрыты.
+- [ ] T0: `No spec change`; archive не требуется.
 - [ ] `verify-change` пройден.
 - [ ] `openspec validate --all --strict` зелёный.
 - [ ] Change заархивирован; `specs/` обновлён.
@@ -128,6 +143,9 @@ openspec validate --all --strict
 ## Антипаттерны
 
 - Спека после кода, чтобы оправдать реализацию.
+- Tier не записан или T2 без threat model/contract/property.
+- `tasks.md` без RED-теста на AC.
+- T0 через TDD/e2e/change/archive.
 - Archive пропущен → спека врёт.
 - `specs/` правится в ветке фичи.
 - Один change на пять capability.

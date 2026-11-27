@@ -47,9 +47,10 @@ git worktree add .worktrees/task-42 -b task/42-checkout
 ## PR
 
 - Заголовок — поведение, не файлы.
-- В описании: PBI/change, `openspec show <id> --diff`, что проверено, как
-  откатить.
-- < 400 строк; больше — разбить.
+- В описании: Tier, PBI/change, `openspec show <id> --diff`, evidence,
+  что проверено, как откатить.
+- < 400 строк; больше — только owner-approved исключение с причиной и
+  сроком.
 - Автор не ревьюит себя; ревьюер — другая роль/модель.
 - Ревью смотрит intent (AC, спека), не только диф.
 - ≤ 3 блокирующих комментария; стиль — линтеру.
@@ -70,9 +71,9 @@ git worktree add .worktrees/task-42 -b task/42-checkout
 
 Источник — `docs/quality/dod.md`. Не дублировать здесь.
 
-Коротко: AC + e2e, тесты, typecheck/lint/build, security, a11y, perf,
-observability, docs, OpenSpec archive, rollback, preview, ревью не-автора,
-живая проверка владельца.
+Коротко: Tier, TDD/ATDD evidence, T2-артефакты по волне, AC + e2e, тесты,
+typecheck/lint/build, security, a11y, perf, observability, docs, OpenSpec
+archive, rollback, preview, ревью не-автора, живая проверка владельца.
 
 ## Безопасность
 
@@ -93,6 +94,14 @@ observability, docs, OpenSpec archive, rollback, preview, ревью не-авт
 
 ## Ревью-чеклист
 
+- [ ] Tier T0/T1/T2; T0 не требует TDD/ATDD.
+- [ ] T1/T2: ATDD happy/error и RED-evidence (тест падал без кода).
+- [ ] T2: threat model, contract/property, runbook/rollback; SLO/логи
+      обязательны.
+- [ ] T2: mutation/SAST/alert/RUM — по волне; field RUM — до публичного
+      запуска.
+- [ ] Исключение: owner/причина/срок/артефакт.
+- [ ] P3 debt owner/срок; P0/P1 postmortem.
 - [ ] Соответствует AC и спеке.
 - [ ] Нет ослабления тестов/CI.
 - [ ] Нет секретов и PII в логах.

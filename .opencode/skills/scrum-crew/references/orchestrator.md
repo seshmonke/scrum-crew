@@ -37,8 +37,10 @@ INIT → PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CL
 ## Диспатч
 
 1. Выбрать PBI: порядок PO → зависимости → конфликт файлов → WIP.
-2. Проверить DoR: change, `validate --strict`, AC, `owns:`.
-3. Создать worktree `task/NN-*` и `task.md`.
+2. Проверить DoR: change, `validate --strict`, AC, Tier, `owns:`,
+   T2-артефакты.
+3. Создать worktree `task/NN-*` и `task.md` с Tier, артефактами и
+   RED-требованием.
 4. Записать lease в `.scrum/locks/NN.json` (owner, expires_at).
 5. Запустить owner-субагента: role card + brief + контракты + evidence.
 6. Получить `report.json`.
@@ -51,10 +53,10 @@ INIT → PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CL
 
 Агенту не даётся весь репозиторий и вся история. Даётся:
 - Sprint Goal (1 строка);
-- `task.md` (AC, скоуп, non-goals);
-- контракты;
+- `task.md` (Tier, AC, скоуп, non-goals);
+- контракты и обязательные артефакты (T2 — threat model/contract/SLO);
 - 2–5 ссылок на доки;
-- DoD и формат evidence;
+- DoD и формат evidence, включая RED/GREEN;
 - границы и стоп-условия.
 
 ## Гейты
@@ -62,10 +64,12 @@ INIT → PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CL
 ```
 pnpm verify
 pnpm test:e2e
-pnpm audit:security
-pnpm test:a11y
-pnpm budget:perf
 openspec validate --all --strict
+
+# owner-exception до появления скриптов:
+pnpm audit:security   # Q1.4
+pnpm test:a11y        # Wave 2
+pnpm budget:perf      # Q1.6
 ```
 
 В `sprint.md` / `evidence/` пишется: команда, exit code, хвост вывода,
@@ -76,13 +80,15 @@ commit SHA. «Зелёно» без вывода не принимается.
 Личный приватный репозиторий не даёт GitHub merge queue. Поэтому:
 
 1. PR открыт; обязательные checks зелёные.
-2. Reviewer (не автор) оставил review-artifact.
-3. `review-gate` ставит статус.
-4. Оркестратор: rebase на main → verify → squash-merge → удалить ветку.
-5. Следующий PR — только после зелёного main.
-6. Конфликт/красный — назад автору с ошибкой как следующим промптом.
-7. Один мерж за раз. Параллельный мерж запрещён.
-8. Пакет из нескольких PR: rebase всех → CI на пакете → мерж по одному;
+2. Evidence: TDD/ATDD для T1/T2; T2-артефакты текущей волны.
+   Нет evidence — PR не мержится.
+3. Reviewer (не автор) оставил review-artifact.
+4. `review-gate` ставит статус.
+5. Оркестратор: rebase на main → verify → squash-merge → удалить ветку.
+6. Следующий PR — только после зелёного main.
+7. Конфликт/красный — назад автору с ошибкой как следующим промптом.
+8. Один мерж за раз. Параллельный мерж запрещён.
+9. Пакет из нескольких PR: rebase всех → CI на пакете → мерж по одному;
    красный пакет — бисекция.
 
 ## Бюджет
@@ -94,6 +100,8 @@ commit SHA. «Зелёно» без вывода не принимается.
 - 3 неудачи на задаче → park + вопрос.
 - 3 REJECT → вопрос владельцу.
 - CI красный > 2 циклов → стоп фич, чинить trunk.
+- Гейт методологии обойдён (нет RED-evidence, T2-артефакта или
+  исключения) → стоп и разбор.
 - `.scrum/STOP` — жёсткий стоп на каждом шаге.
 
 ## Именованные сессии
@@ -146,6 +154,7 @@ close()
 - Не пишет код за роли (кроме мелких правок в гейтах).
 - Не ревьюит вместо ревьюера.
 - Не принимает «зелено» на слово.
+- Не мержит PR без TDD/ATDD-evidence или T2-артефакта текущей волны.
 - Не мержит параллельно.
 - Не начинает следующий спринт без команды.
 - Не выдумывает продукт, стек и состав.
