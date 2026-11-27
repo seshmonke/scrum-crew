@@ -23,9 +23,11 @@
 - `.scrum/board.json` — задачи, статусы, owners, PR.
 - `.scrum/sprints/*/` — sprint, daily, review, retro, evidence.
 - `docs/tasks/*.md` — бэклог, спринты.
+- `docs/quality/methodologies.md`, `docs/quality/dod.md` — политика.
 - `docs/quality/audits/` — прошлые аудиты.
 - `openspec/changes/archive/` — что вошло в инкремент.
 - `git log`, PR, CI — cycle time, review latency, rework.
+- `.scrum/evidence/` — RED/GREEN, T2-артефакты, прогоны.
 - `docs/methodology/DECISIONS.md`, `RAPTOR-SKILL.md` — прошлые изменения.
 
 ## Скоринг
@@ -35,6 +37,10 @@ review latency, trunk red time.
 
 **Качество:** escaped defects, rework, flaky rate, нарушения DoD, spec
 drift, archive lag.
+
+**Внедрение методологий:** доля T1/T2 с RED-evidence, mutation score T2,
+SLO compliance checkout/payments, debt-бюджет, closure postmortem-actions,
+просроченные исключения. Не измерено — `not measured`.
 
 **Поведение агентов:** выход за `owns:`, self-review, evidence без вывода,
 дрейф контекста, игнорирование стоп-условий, prompt injection.
@@ -48,7 +54,8 @@ routing.
 ## Метод
 
 1. Проверить готовность; выбрать режим.
-2. Собрать факты из логов и артефактов; каждое число — со ссылкой.
+2. Собрать факты из логов и артефактов; отдельно — внедрение
+   методологий; каждое число — со ссылкой.
 3. Сравнить с baseline прошлого аудита (если есть).
 4. Найти 1–3 системные находки, а не список из 30.
 5. Для каждой: root cause, proposal, owner, метрика, ожидаемый эффект.
@@ -84,6 +91,7 @@ routing.
 ## Антипаттерны
 
 - Аудит на пустом проекте.
+- Аудит без проверки внедрения методологий.
 - 30 находок без приоритета.
 - Метрика без источника.
 - «Стало лучше» без baseline.

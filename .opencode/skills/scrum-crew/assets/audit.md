@@ -21,6 +21,14 @@
 | Rework | | | | |
 | Cost per merged task | | | | |
 | Ceremony % | | | | |
+| T1/T2 с RED-evidence | | | | |
+| Mutation score T2 | | | | |
+| SLO compliance checkout/payments | | | | |
+| Debt budget used | | | | |
+| Postmortem actions closed | | | | |
+| Overdue exceptions | | | | |
+
+Не измерено — писать `not measured`; не выводить из этого вывод.
 
 ## Находки
 

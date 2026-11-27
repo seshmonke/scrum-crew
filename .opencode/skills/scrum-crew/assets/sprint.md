@@ -10,6 +10,7 @@
 
 - [ ] PBI-1. Один проверяемый итог.
       Change: `openspec/changes/NN-…`
+      Tier: T0 / T1 / T2
       AC: …
       Owner: …
       owns: …
@@ -22,6 +23,24 @@
 ## Анализ перед стартом
 
 По каждой задаче: почему разумна, что проверить до кода, источники.
+
+## Quality gates
+
+| Гейт | Волна | Статус | Evidence |
+|---|---|---|---|
+| TDD/ATDD | 1 | | |
+| contract/property/threat/runbook | 1 | | |
+| SLO-дизайн/логи | 1 | | |
+| mutation | nightly сейчас; блокирует после Q1.0–Q1.6 | | |
+| SAST | ручной/исключение сейчас; блокирует после Q1.0–Q1.6 | | |
+| alert/RUM | owner-исключение сейчас; блокирует после Q1.0–Q1.6 | | |
+| field RUM | до публичного запуска | | |
+| trunk-based/flags/perf | 2 | | |
+| IaC/progressive/debt/postmortem | 3 | | |
+
+## Debt budget
+
+- План: …; факт: …; P3 с owner/сроком: …
 
 ## Риски и зависимости
 
