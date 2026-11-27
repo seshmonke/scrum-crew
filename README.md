@@ -134,12 +134,26 @@ openspec init --tools opencode --scope project
 запусти спринт через scrum-crew
 ```
 
+## Обновление существующего проекта
+
+Скилл не обновляется автоматически. Обновление — только между спринтами
+и отдельным PR.
+
+В OpenCode: команда «обнови скилл» → режим Upgrade. Подробная процедура —
+`.opencode/skills/scrum-crew/references/upgrade.md`.
+
+Установленная версия — `.opencode/skills/scrum-crew/VERSION`. Установщик
+копирует скилл и агентов, но не трогает `.scrum/`, `openspec/`, `docs/`
+и код проекта. После обновления удалите старые папки скилла и обновите
+`opencode.json`, если в нём были старые skill-id.
+
 ## Структура
 
 ```
 .opencode/
   skills/scrum-crew/
     SKILL.md              # вход: режимы, цикл, гейты
+    VERSION               # установленная версия
     references/
       init.md             # стадия 0: продукт, стек, delivery
       scrum.md            # правила и артефакты
