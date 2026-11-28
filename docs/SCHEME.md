@@ -87,6 +87,7 @@ sequenceDiagram
 | Report / handoff / evidence | `.scrum/sprints/NN/tasks/<id>/` | worker |
 | Review | `.scrum/reviews/NN-<task>.md` | reviewer |
 | Поведение | `openspec/specs/`, `openspec/changes/` | PO/Architect/QA |
+| Голос и тексты | `docs/design/content.md`, `docs/design/messaging.md` | Copywriter |
 | Зачем / как / вид / проверка | `docs/concept`, `docs/stack`, `docs/design`, `docs/quality/` | владельцы зон |
 
 ## 5. Гейты

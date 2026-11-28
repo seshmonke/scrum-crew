@@ -26,6 +26,8 @@
 - [ ] Доки не описывают будущее как текущее (`status: plan`).
 - [ ] Обещание теста = ссылка на тест.
 - [ ] Код и чистовик совпадают.
+- [ ] Для пользовательских текстов — Copywriter review и
+  `scripts/slop-check.sh`.
 - [ ] Метрики/размеры/API не скопированы, а взяты из источника.
 - [ ] В PR — host-doc обновлён или `No doc change: <причина>`.
 - [ ] Trace task → change → PR → review → evidence → status полон.
@@ -37,6 +39,7 @@
 - Perf:
 - A11y:
 - Design:
+- Copywriter:
 - User Proxy (hypothesis):
 
 ## Вердикт Methodology

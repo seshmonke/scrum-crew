@@ -22,7 +22,7 @@
 4. Change на каждый behavior-changing PBI.
 5. QA: ATDD happy/error до кода; White Hacker: abuse cases;
    Architect: contract; для T2 — threat model; DevSecOps: SLO/бюджет;
-   Designer: UX.
+   Designer: UX; Copywriter: голос и сообщения.
 6. Оценка t-shirt; проверка, что влезает в 4–6 циклов.
 7. SM: `.scrum/sprints/NN/sprint.md` + строка в `INDEX.md` +
    `.scrum/README.md` (phase `PLANNING/READY`, ссылки).
@@ -36,7 +36,8 @@ T0: TDD/ATDD/e2e/archive не применяются; `verify` + проверк�
 ссылок/фактов.
 Направление пусто — стоп и вопрос.
 
-Если PBI касается запуска, контента, поддержки или легала — активировать
+Если PBI меняет текст, лендинг, UI или письма — Copywriter в planning.
+Если PBI касается запуска, каналов, поддержки или легала — активировать
 on-demand шляпу **только на этот PBI**: Growth/Content, Support/Community
 или Legal/Privacy. Они не входят в дейли, не имеют своего бэклога; задачи
 идут через PO. Legal может наложить вето на релиз.
@@ -76,7 +77,7 @@ durable-папке, не в чате.
    diff и подтверждает RED-evidence и T2-гейты текущей волны.
 3. Drift-проверка: старые имена, будущее как текущее, обещание теста без
    ссылки, код vs чистовик, `No doc change`.
-4. Специалисты — по строке: design / security / perf / a11y.
+4. Специалисты — по строке: copy / design / security / perf / a11y.
 5. User Proxy — гипотезы с пометкой.
 6. PO — ACCEPT/REJECT с причиной.
 7. Новые задачи — в бэклог.

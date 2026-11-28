@@ -100,7 +100,8 @@ Council собирается только по триггеру: 2 раунда 
    стандарт).
 3. Нет возражений — принято.
 4. Есть — решает: PO (ценность), Architect (контракт), SM (процесс),
-   DevSecOps/White Hacker (security-вето), Designer (a11y/сценарий).
+   DevSecOps/White Hacker (security-вето), Designer (a11y/сценарий),
+   Copywriter (голос/текст).
 5. Решение — в `decision` и в артефакт.
 
 Это consent, а не consensus: не «все за», а «нет обоснованных возражений».
@@ -136,8 +137,8 @@ Driver пишет и коммитит; navigator читает и пишет в `
 ### Ревью-сворм
 
 На один PR параллельно: QA (тестируемость), DevSecOps (authz/секреты),
-Designer/a11y (доступность), White Hacker (abuse cases). Оркестратор
-дедуплицирует.
+Designer/a11y (доступность), Copywriter (голос/текст), White Hacker
+(abuse cases). Оркестратор дедуплицирует.
 
 ### Изменение поведения
 

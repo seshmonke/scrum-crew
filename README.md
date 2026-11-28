@@ -1,10 +1,10 @@
 # Scrum Crew
 
 Переиспользуемая методология Scrum-команды агентов для веб-разработки.
-Одна команда, 12+ ролей, спринт 4–8 часов, OpenSpec для поведения,
+Одна команда, 15 ролей, спринт 4–8 часов, OpenSpec для поведения,
 монорепозиторий, последовательный merge train.
 
-Статус: **v0.5.1**. Продукт и стек не входят — они определяются на стадии
+Статус: **v0.6.0**. Продукт и стек не входят — они определяются на стадии
 Init в каждом проекте.
 
 ## Что даёт
@@ -23,8 +23,11 @@ Init в каждом проекте.
   пишет `No doc change`; ревью проверяет drift.
 - **Спринт 4–8 часов:** 4–6 циклов по 60–90 минут, дейлик на границе
   цикла.
-- **12+ ролей:** PO, SM, Architect, Fullstack, Frontend, Backend, Data, QA,
-  Tester, DevSecOps, White Hacker, Designer, User Proxy, Delivery.
+- **15 ролей:** PO, SM, Architect, Fullstack, Frontend, Backend, Data, QA,
+  Tester, DevSecOps, White Hacker, Designer, Copywriter, User Proxy,
+  Delivery.
+- **Copywriter:** голос, сообщения и тексты всех поверхностей; гейт против
+  слопа и `scripts/slop-check.sh`.
 - **OpenSpec:** каждый behavior-changing PBI = change с proposal, delta
   specs, design и tasks; ревью намерения до кода.
 - **12 слотов в коде** с contract baseline, file ownership, shared-file
@@ -35,6 +38,7 @@ Init в каждом проекте.
   материалов; 1–3 системные находки, read-only, изменения через ADR/PR.
 - **On-demand шляпы:** Growth/Content, Support/Community, Legal/Privacy —
   только под PBI своего домена, без второго бэклога; Legal имеет вето.
+  Copywriter — постоянная роль: голос нужен каждому PBI, где есть текст.
 - **Безопасность:** автор ≠ ревьюер, least privilege, нет прод-доступа,
   гейты командами, а не мнениями.
 
@@ -151,7 +155,7 @@ openspec init --tools opencode --scope project
 В OpenCode: команда «обнови скилл» → режим Upgrade. Подробная процедура —
 `.opencode/skills/scrum-crew/references/upgrade.md`; migration notes
 v0.4.0 → v0.5.0 — в `CHANGELOG.md` и разделе 9.1 `upgrade.md`.
-v0.5.1 — Raptor-рефакторинг без migration.
+v0.6.0 — роль Copywriter и анти-слоп-гейт, migration не требуется.
 
 Установленная версия — `.opencode/skills/scrum-crew/VERSION`. Установщик
 копирует скилл и агентов, но не трогает `.scrum/`, `openspec/`, `docs/`
@@ -169,7 +173,8 @@ v0.5.1 — Raptor-рефакторинг без migration.
       init.md             # стадия 0: продукт, стек, delivery
       upgrade.md          # обновление скилла в проекте
       scrum.md            # правила и артефакты
-      roles.md            # 14 ролей + аудитор
+      roles.md            # 15 ролей + on-demand
+      copywriting.md      # голос, анти-слоп, инструменты, обучение
       cycle.md            # церемонии и шаги
       orchestrator.md     # состояние, диспатч, merge train
       context.md          # карта входа, progressive disclosure, brief
@@ -178,6 +183,8 @@ v0.5.1 — Raptor-рефакторинг без migration.
       git-quality.md      # ветки, PR, безопасность, a11y/perf
       failure-modes.md    # сбои и восстановление
       audit.md            # мета-аудит: готовность, скоринг, находки
+    scripts/
+      slop-check.sh       # проверка готового текста на штампы и давление
     assets/               # context, brief, report, sprint, daily, review,
                           # retro, handoff, pr, audit; task — deprecated stub
   agents/
@@ -245,9 +252,10 @@ AGENTS.md                                  проект
 | DevSecOps / SRE | CI, секреты, IaC, наблюдаемость |
 | White Hacker | threat model, abuse cases, red team |
 | Designer | UX/UI, дизайн-система, a11y |
+| Copywriter | голос, сообщения, тексты, анти-слоп |
 | User Proxy | персоны, сценарии, гипотезы |
 | Delivery / PM | зависимости, риски, релизы |
-| Growth / Content | запуск, контент, SEO, кампании; on-demand |
+| Growth / Content | запуск, каналы, SEO, кампании; on-demand |
 | Support / Community | тикеты, отзывы, churn; on-demand |
 | Legal / Privacy | комплаенс, PII, cookies; on-demand, вето |
 | Methodology Auditor | качество методологии; on-demand, только при материалах |
@@ -269,14 +277,18 @@ drift, stale claims, rework из-за контекста; оценка — по 
 
 ## On-demand шляпы
 
-- **Growth / Content** — запуск, лендинг, SEO, соцсети, email, PR.
+- **Growth / Content** — запуск, каналы, SEO, соцсети, email, PR; тексты —
+  у Copywriter.
 - **Support / Community** — тикеты, отзывы, FAQ, churn.
 - **Legal / Privacy** — PII, cookies, ToS, DPA; вето на релиз, но не
   замена юристу.
 
-Не входят в постоянный состав: активируются под конкретный PBI, не имеют
-дейли и своего бэклога. Задачи — через PO. Если шляпа не активировалась
-3 спринта — удалить.
+Copywriter — постоянная роль, не on-demand: голос нужен каждому PBI, где
+есть текст.
+
+Эти шляпы не входят в постоянный состав: активируются под конкретный PBI,
+не имеют дейли и своего бэклога. Задачи — через PO. Если шляпа не
+активировалась 3 спринта — удалить.
 
 ## Принципы
 

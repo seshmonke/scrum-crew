@@ -1,5 +1,21 @@
 # Changelog
 
+## v0.6.0 — 2026-11-28
+
+- **Роль Copywriter:** 15-я постоянная карточка — голос, сообщения и
+  тексты всех поверхностей. Граница с Growth/Content: каналы и метрика —
+  Growth, слова — Copywriter.
+- **`references/copywriting.md`:** кодекс вкуса, шкала голоса, лексикон,
+  анти-слоп, процесс, инструменты, тренировка, чек-лист, источники.
+- **`scripts/slop-check.sh`:** проверка готового текста на штампы,
+  канцелярит и давление; входит в DoD роли.
+- **Интеграция:** `SKILL.md`, `init.md`, `cycle.md`, `communication.md`,
+  `README.md`, `assets/review.md`, `assets/daily.md`, `docs/DECISIONS.md`
+  (D19); `docs/design/content.md` — зона Copywriter.
+- **Evidence:** `docs/evidence/COPYWRITER-ROLE.md` — RED/GREEN-проверка
+  роли на двух брифах.
+- Migration: не требуется; новые файлы ставятся установщиком.
+
 ## v0.5.1 — 2026-11-28
 
 - **Raptor-поколение 1 → 2:** полный проход по скиллу — требования →

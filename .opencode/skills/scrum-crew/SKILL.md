@@ -62,12 +62,13 @@ Sprint 1.
 
 ## 2. Роли
 
-14 карточек + on-demand hats — `references/roles.md`. Правила:
+15 карточек + on-demand hats — `references/roles.md`. Правила:
 
 - Роль — шляпа; один owner на задачу; остальные reviewer/consultant.
 - Постоянная роль владеет зоной; на задачу поднимается worker.
 - Автор не ревьюит себя и не мержит свой PR.
 - User Proxy без вето; White Hacker — вето только на security.
+- Copywriter владеет голосом и текстами; Growth — каналами и метрикой.
 - On-demand hats (Growth/Content, Support/Community, Legal/Privacy) —
   только под PBI; нет дейли и своего бэклога; Legal — вето на релиз.
 
@@ -102,7 +103,7 @@ threat model, runbook; mutation/SAST/alert/RUM — nightly/исключение.
 1. PO: цель + порядок; Sprint Goal — один исход; PBI в 4–6 циклов.
 2. Behavior-changing PBI — OpenSpec change; `validate --strict`.
 3. Architect — capability; QA — сценарии; White Hacker — abuse;
-   Designer — UX.
+   Designer — UX; Copywriter — голос и сообщения.
 4. SM фиксирует `sprint.md`, `.scrum/README.md`, `INDEX.md`; на задачу —
    brief.
 
@@ -264,8 +265,10 @@ claims. Оценка — по конечному состоянию. Подро�
 
 ## 13. Файлы
 
-`references/`: init, upgrade, scrum, roles, cycle, orchestrator, context,
-communication, openspec, git-quality, failure-modes, audit.
+`references/`: init, upgrade, scrum, roles, copywriting, cycle,
+orchestrator, context, communication, openspec, git-quality,
+failure-modes, audit.
+`scripts/`: `slop-check.sh` — ловит штампы и давление в готовом тексте.
 `assets/`: context, brief, report, sprint, daily, review, retro, handoff,
 pr, audit; `task` — deprecated stub.
 `VERSION`: установленная версия скилла.
