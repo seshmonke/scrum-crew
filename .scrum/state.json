@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "phase": "BUILDING",
+  "sprint": 99,
+  "cycle": 1,
+  "updated_at": "2026-11-28T10:00:00Z",
+  "stop": false,
+  "human_gate": null,
+  "notes": "Dry-run example only. Not a product sprint; installer does not copy this folder."
+}

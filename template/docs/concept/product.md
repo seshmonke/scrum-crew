@@ -1,7 +1,12 @@
 # Product
 
+> **Context:** `status: plan` · `updated: YYYY-MM-DD` · `owner: владелец` ·
+> `sprint: —` · `task: —` · `change: —` ·
+> links: [.scrum/README.md](../../.scrum/README.md) · [DoD](../quality/dod.md)
+
 Заполняется на стадии Init до первого спринта. Не выдумывать: ответы
-владельца.
+владельца. После подтверждения Goal/сценария/метрики/non-goals перевести
+`status: plan` → `active`.
 
 ## Product Goal
 

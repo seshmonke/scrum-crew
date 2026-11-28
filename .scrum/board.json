@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "updated_at": "2026-11-28T10:20:00Z",
+  "tasks": [
+    {
+      "id": "99.1",
+      "title": "Карта входа для нового агента",
+      "status": "in_review",
+      "owner": "scrum-worker",
+      "pr": 999,
+      "commit": "abc1234",
+      "change": "No spec change: docs/example",
+      "brief": "sprints/99/tasks/99.1/brief.md",
+      "report": "sprints/99/tasks/99.1/report.md",
+      "handoff": "sprints/99/tasks/99.1/handoff.md",
+      "review": "reviews/99-99.1.md",
+      "evidence": "sprints/99/tasks/99.1/evidence/"
+    }
+  ]
+}

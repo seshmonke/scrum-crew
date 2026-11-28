@@ -1,5 +1,10 @@
 # Audit NN — YYYY-MM-DD
 
+> **Context:** `status: active` · `updated: YYYY-MM-DD` · `owner: Methodology
+> Auditor` · `sprint: —` · `task: —` · `change: —` ·
+> links: `.opencode/skills/scrum-crew/references/audit.md` ·
+> `.scrum/README.md`
+
 Режим: pilot / full
 Готовность: N закрытых спринтов, M merged задач, K событий
 Период: с … по …
@@ -27,8 +32,41 @@
 | Debt budget used | | | | |
 | Postmortem actions closed | | | | |
 | Overdue exceptions | | | | |
+| Discovery pass rate | | | | |
+| Activation pass rate | | | | |
+| Task success | | | | |
+| Files read before first edit | | | | |
+| Durable brief/handoff % | | | | |
+| Trace completeness % | | | | |
+| Map freshness % | | | | |
+| Drift findings (unresolved) | | | | |
+| Stale claims | | | | |
+| Rework из-за контекста | | | | |
+| Lost artifacts / recovery | | | | |
+| Broken links | | | | |
+
+Пороги: discovery ≥ 90% (pilot ≥ 80%), activation ≥ 90%, task success
+≥ 80%, durable brief/handoff 100%, trace 100%, map freshness 100%,
+unresolved drift 0, stale claims 0 на close, rework из-за контекста ≤ 10%,
+файлов до первой правки ≤ 8, потерянных артефактов 0, recovery ≤ 1 цикл,
+битых ссылок 0. Ниже порога — находка с owner.
 
 Не измерено — писать `not measured`; не выводить из этого вывод.
+
+## Контекст и навигация
+
+- Discovery: агент нашёл `.scrum/README.md` и назвал phase/sprint/task с
+  первой попытки? Источник — read-back/транскрипты.
+- Activation: открыл brief + change + DoD до первой правки?
+- Efficiency: сколько файлов/токенов до первой правки; бриф ≤ 1 страницы;
+  резюме отчёта ≤ 10 строк.
+- Durable: brief/handoff/report/evidence в `tasks/<id>/`, не в `/tmp`.
+- Trace: task → change → PR → review → evidence → status.
+- Map freshness: README обновлялся на каждой границе фазы.
+- Drift/stale: старые имена, будущее как текущее, тест без ссылки,
+  скопированные метрики/API.
+- Rework из-за контекста: переделка из-за неверного brief/карты.
+- Оценка — по конечному состоянию и чекпоинтам, не по «правильному пути».
 
 ## Находки
 

@@ -1,5 +1,9 @@
 # Аудит методологии
 
+> **Context:** `status: active` · `updated: YYYY-MM-DD` · `owner: Methodology
+> Auditor` · `sprint: —` · `task: —` · `change: —` ·
+> links: [.scrum/README.md](../../../.scrum/README.md) · [DoD](../dod.md)
+
 Отчёты мета-роли **Methodology Auditor**. Смотрит не на продукт, а на то,
 как работает система агентов.
 

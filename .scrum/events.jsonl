@@ -1,0 +1,3 @@
+{"ts":"2026-11-28T09:55:00Z","type":"phase","sprint":99,"phase":"BUILDING","artifact":".scrum/sprints/99/sprint.md"}
+{"ts":"2026-11-28T10:00:00Z","type":"dispatch","sprint":99,"task":"99.1","artifact":".scrum/sprints/99/tasks/99.1/brief.md"}
+{"ts":"2026-11-28T10:20:00Z","type":"report","sprint":99,"task":"99.1","pr":999,"commit":"abc1234","artifact":".scrum/sprints/99/tasks/99.1/report.md"}

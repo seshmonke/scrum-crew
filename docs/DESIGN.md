@@ -422,16 +422,23 @@ White Hacker — abuse cases; Designer — UX-риски. Синк только 
   skills/scrum-crew/          # методология, роли, шаблоны
   agents/scrum/*.md           # 12+ субагентов с правами
 .scrum/
+  README.md                   # карта входа (SM/оркестратор, границы фаз)
   state.json                  # текущее состояние (single writer: оркестратор)
   events.jsonl                # append-only журнал
   board.json                  # задачи, статусы, владельцы
   locks/                      # lease на задачу/файлы
   sprints/NN/
-    sprint.md                 # цель, PBI, план
+    sprint.md                 # цель, PBI, trace, план
     daily.md
     review.md
     retro.md
-    evidence/                 # вывод проверок, ссылки
+    evidence/                 # вывод проверок уровня спринта
+    tasks/<id>/
+      brief.md                # контекстный пакет
+      report.md               # отчёт worker'а
+      handoff.md
+      evidence/               # RED/GREEN, вывод, замеры
+  reviews/                    # review-артефакты (task id + PR)
   questions/                  # вопросы владельцу
   budget.json                 # токены/деньги по ролям
 docs/                         # чистовик продукта
@@ -457,28 +464,39 @@ proposed → ready → claimed → in_progress → in_review
 
 ### 6.4. Цикл диспетчеризации
 
-1. Выбрать следующий PBI: порядок PO + зависимости + конфликт файлов.
-2. Создать ветку/worktree, записать `task.md` (цель, AC, файлы, контракты,
-   non-goals, DoD, формат доказательств).
-3. Запустить owner-субагента с role card + brief + только нужные документы.
-4. Получить `report.json`: статус, файлы, команды, вывод, блокеры.
+1. Выбрать следующий PBI: порядок PO + зависимости + конфликт файлов;
+   WIP 1–2, потолок 6.
+2. Создать ветку/worktree и durable-папку
+   `.scrum/sprints/NN/tasks/<id>/`; записать `brief.md` (objective, AC,
+   owns, контракты, non-goals, output format, tools, evidence, stop
+   conditions).
+3. Запустить owner-субагента с role card + brief + 2–5 ссылок; получить
+   read-back до первой правки.
+4. Получить `report.md` и резюме ≤ 10 строк + ссылки; evidence — в
+   `tasks/<id>/evidence/`.
 5. Оркестратор **сам** прогоняет `verify`, не доверяя отчёту.
-6. Запустить reviewer-субагента (другая роль, другая модель/провайдер).
-7. Получить вердикт + находки.
-8. Rebase на main, повторный `verify`, squash-merge, обновить доску.
-9. Снять lease, записать событие, обновить metrics.
+6. Запустить reviewer-субагента (другая роль, другая модель/провайдер);
+   reviewer читает brief/report/evidence/PR/diff, не логи.
+7. Получить вердикт + находки + drift-проверку в
+   `.scrum/reviews/NN-<task>.md`.
+8. Rebase на main, повторный `verify`, doc-change check, squash-merge,
+   обновить доску и trace.
+9. Снять lease, записать событие с task/pr/commit/artifact, обновить
+   metrics.
 
 ### 6.5. Контекстный пакет
 
 Агенту не даётся весь репозиторий и вся история. Даётся:
 - Sprint Goal (1 строка);
-- бриф задачи (AC, скоуп, non-goals);
+- бриф задачи (objective, AC, owns, non-goals, output format, tools,
+  evidence, stop conditions);
 - контракты (типы/схема/OpenAPI);
 - ссылки на 2–5 релевантных документов;
 - DoD и формат доказательств;
-- границы и стоп-условия.
+- границы, стоп-условия и обязательный read-back.
 
-Это снижает дрейф контекста и стоимость.
+Вход — `AGENTS.md` → `.scrum/README.md` → `brief.md`, а не корень
+репозитория. Это снижает дрейф контекста и стоимость.
 
 ### 6.6. Гейты
 

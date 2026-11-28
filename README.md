@@ -4,7 +4,7 @@
 Одна команда, 12+ ролей, спринт 4–8 часов, OpenSpec для поведения,
 монорепозиторий, последовательный merge train.
 
-Статус: **v0.4.0**. Продукт и стек не входят — они определяются на стадии
+Статус: **v0.5.0**. Продукт и стек не входят — они определяются на стадии
 Init в каждом проекте.
 
 ## Что даёт
@@ -12,6 +12,15 @@ Init в каждом проекте.
 - **Init как стадия 0:** продукт → стек → delivery → walking skeleton.
   Код не пишется, пока не определены Goal, пользователь, сценарий,
   метрика и non-goals.
+- **Карта входа:** `.scrum/README.md` — phase, sprint, goal, next gate,
+  active tasks и 5–6 ссылок. Субагент стартует с карты и brief задачи, а
+  не с корня репозитория.
+- **Durable task workspace:** `.scrum/sprints/NN/tasks/<id>/` с brief,
+  report, handoff и evidence. Переживает рестарт машины; `/tmp` и чат —
+  не хранилище.
+- **Свежесть:** `status: plan|active|done|superseded`, `updated`, `owner`,
+  `sprint`, `task`, `change`, `links`; PR задачи правит host-файл или
+  пишет `No doc change`; ревью проверяет drift.
 - **Спринт 4–8 часов:** 4–6 циклов по 60–90 минут, дейлик на границе
   цикла.
 - **12+ ролей:** PO, SM, Architect, Fullstack, Frontend, Backend, Data, QA,
@@ -140,7 +149,8 @@ openspec init --tools opencode --scope project
 и отдельным PR.
 
 В OpenCode: команда «обнови скилл» → режим Upgrade. Подробная процедура —
-`.opencode/skills/scrum-crew/references/upgrade.md`.
+`.opencode/skills/scrum-crew/references/upgrade.md`; migration notes
+v0.4.0 → v0.5.0 — в `CHANGELOG.md` и разделе 9.1 `upgrade.md`.
 
 Установленная версия — `.opencode/skills/scrum-crew/VERSION`. Установщик
 копирует скилл и агентов, но не трогает `.scrum/`, `openspec/`, `docs/`
@@ -161,12 +171,14 @@ openspec init --tools opencode --scope project
       roles.md            # 14 ролей + аудитор
       cycle.md            # церемонии и шаги
       orchestrator.md     # состояние, диспатч, merge train
+      context.md          # карта входа, progressive disclosure, brief
       communication.md    # шина и протоколы
       openspec.md         # change-поток и гейты
       git-quality.md      # ветки, PR, безопасность, a11y/perf
       failure-modes.md    # сбои и восстановление
       audit.md            # мета-аудит: готовность, скоринг, находки
-    assets/               # sprint, daily, review, retro, task, handoff, pr, audit
+    assets/               # context, brief, report, sprint, daily, review,
+                          # retro, handoff, pr, audit; task — deprecated stub
   agents/
     scrum-orchestrator.md
     scrum-worker.md
@@ -174,7 +186,10 @@ openspec init --tools opencode --scope project
     scrum-security-reviewer.md
     scrum-methodology-auditor.md
 template/                  # каркас проекта для Init
+  .scrum/README.md         # карта входа (INIT)
 docs/                      # дизайн методологии и 100 источников
+.scrum/                    # dry-run пример карты и task workspace
+                           # (не ставится)
 install.ps1
 install.sh
 ```
@@ -193,6 +208,23 @@ PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CLOSED
 
 Гейт — команда + exit code + evidence. «Зелёно» без вывода не
 принимается.
+
+## Карта входа
+
+```
+AGENTS.md                                  проект
+.scrum/README.md                           спринт: phase, goal, gate, tasks
+.scrum/sprints/NN/tasks/<id>/brief.md      задача: AC, owns, evidence
+```
+
+- `.scrum/README.md` пишет только SM/оркестратор на границах фаз. Это
+  ссылки и снимок, не склад фактов.
+- Brief/report/handoff/evidence живут в task-папке; worktree — runtime.
+- PR задачи правит host-файл или пишет `No doc change: <причина>`.
+- Ревью проверяет drift и «обещание теста = ссылка на тест».
+- Dry-run пример — `.scrum/sprints/99/` в репозитории скилла.
+
+Подробно — `.opencode/skills/scrum-crew/references/context.md`.
 
 ## Роли
 
@@ -228,6 +260,9 @@ PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CLOSED
 Нет материалов — `No audit: insufficient material`, отчёт не создаётся.
 Read-only; 1–3 находки с доказательством, root cause, owner и метрикой;
 изменения — через ADR/PR. Нет эффекта два аудита — роль удаляется.
+Метрики контекста: discovery/activation, durable brief/handoff, trace,
+drift, stale claims, rework из-за контекста; оценка — по конечному
+состоянию и чекпоинтам.
 
 ## On-demand шляпы
 
@@ -265,8 +300,6 @@ Read-only; 1–3 находки с доказательством, root cause, o
 
 Масса почти не выросла, хотя добавлены Init и мета-аудит; SKILL и число
 шаблонов сокращены. Подробности — `docs/RAPTOR-SKILL.md`.
-
-Подробности — `docs/RAPTOR-SKILL.md`.
 
 ## Ограничения
 

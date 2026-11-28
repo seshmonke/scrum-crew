@@ -1,0 +1,7 @@
+Dry-run evidence: Task 99.1
+
+$ link check .scrum/README.md .scrum/sprints/99
+links: ok
+
+$ git diff --check
+exit: 0

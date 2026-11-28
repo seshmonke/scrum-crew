@@ -1,5 +1,9 @@
 # Бэклог
 
+> **Context:** `status: active` · `updated: YYYY-MM-DD` · `owner: PO` ·
+> `sprint: —` · `task: —` · `change: —` ·
+> links: [.scrum/README.md](../../.scrum/README.md) · [INDEX](INDEX.md)
+
 Весь пул задач без привязки ко времени. Порядок — приоритет.
 
 Формат строки:

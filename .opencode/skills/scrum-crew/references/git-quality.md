@@ -25,7 +25,9 @@ openspec
 - Squash-merge, линейная история, force push запрещён.
 - Один worktree = одна задача = один агент; свой порт и БД.
 - Агент не делает `git checkout`/`switch`; мерж — из основного worktree.
-- Worktree и ветка удаляются после мержа.
+- Worktree и ветка удаляются после мержа; durable-артефакты остаются в
+  `.scrum/sprints/NN/tasks/<id>/`.
+- Brief/report/handoff/evidence не живут в worktree как в источнике истины.
 
 ```bash
 git worktree add .worktrees/task-42 -b task/42-checkout
@@ -47,23 +49,29 @@ git worktree add .worktrees/task-42 -b task/42-checkout
 ## PR
 
 - Заголовок — поведение, не файлы.
-- В описании: Tier, PBI/change, `openspec show <id> --diff`, evidence,
-  что проверено, как откатить.
+- В описании: task id, Tier, PBI/change, `openspec show <id> --diff`,
+  ссылки на brief/report/evidence, что проверено, как откатить.
+- Doc change: правка host-файла или `No doc change: <причина>`.
+- Drift: нет старых имён, будущего как текущего, обещания теста без
+  ссылки на тест.
 - < 400 строк; больше — только owner-approved исключение с причиной и
   сроком.
 - Автор не ревьюит себя; ревьюер — другая роль/модель.
-- Ревью смотрит intent (AC, спека), не только диф.
+- Ревью смотрит intent (AC, спека), не только диф; читает durable-
+  артефакты, а не логи.
 - ≤ 3 блокирующих комментария; стиль — линтеру.
 
 ## Merge train
 
 1. PR + зелёные checks.
-2. Reviewer approved (не автор).
-3. Rebase на main.
-4. `verify` заново.
-5. Squash-merge.
-6. Следующий PR — только после зелёного main.
-7. Пакет: rebase всех → CI на пакете → мерж по одному; красный — бисекция.
+2. Reviewer approved (не автор); review-артефакт с task id и PR.
+3. Evidence: brief/report/evidence в task-папке; doc change или
+   `No doc change`.
+4. Rebase на main.
+5. `verify` заново.
+6. Squash-merge; trace/board/event обновлены.
+7. Следующий PR — только после зелёного main.
+8. Пакет: rebase всех → CI на пакете → мерж по одному; красный — бисекция.
 
 12 слотов и circuit breaker — `references/orchestrator.md`.
 
@@ -102,6 +110,11 @@ archive, rollback, preview, ревью не-автора, живая прове�
       запуска.
 - [ ] Исключение: owner/причина/срок/артефакт.
 - [ ] P3 debt owner/срок; P0/P1 postmortem.
+- [ ] Review-артефакт содержит task id и PR; brief/report/evidence
+      прочитаны, не логи.
+- [ ] Drift: старые имена, будущее как текущее, обещание теста = ссылка.
+- [ ] PR: host-doc обновлён или `No doc change: <причина>`.
+- [ ] Trace task → change → PR → review → evidence → status полон.
 - [ ] Соответствует AC и спеке.
 - [ ] Нет ослабления тестов/CI.
 - [ ] Нет секретов и PII в логах.

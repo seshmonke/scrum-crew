@@ -1,5 +1,9 @@
 # Definition of Ready / Definition of Done
 
+> **Context:** `status: active` · `updated: YYYY-MM-DD` · `owner: QA/SM` ·
+> `sprint: —` · `task: —` · `change: —` ·
+> links: [.scrum/README.md](../../.scrum/README.md) · [INDEX](../tasks/INDEX.md)
+
 ## Definition of Ready (PBI)
 
 PBI можно брать в спринт, если:

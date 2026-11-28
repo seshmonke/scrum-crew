@@ -19,15 +19,18 @@
 
 ## Материалы
 
+- `.scrum/README.md` — карта входа, фазы, ссылки.
 - `.scrum/events.jsonl` — фазы, гейты, вопросы, решения, мержи.
-- `.scrum/board.json` — задачи, статусы, owners, PR.
+- `.scrum/board.json` — задачи, статусы, owners, PR, change, brief.
 - `.scrum/sprints/*/` — sprint, daily, review, retro, evidence.
-- `docs/tasks/*.md` — бэклог, спринты.
+- `.scrum/sprints/*/tasks/*/` — brief, report, handoff, evidence.
+- `.scrum/reviews/` — review-артефакты с task id и PR.
+- `docs/tasks/*.md` — бэклог, направление.
 - `docs/quality/methodologies.md`, `docs/quality/dod.md` — политика.
 - `docs/quality/audits/` — прошлые аудиты.
 - `openspec/changes/archive/` — что вошло в инкремент.
 - `git log`, PR, CI — cycle time, review latency, rework.
-- `.scrum/evidence/` — RED/GREEN, T2-артефакты, прогоны.
+- Durable task evidence — RED/GREEN, T2-артефакты, прогоны.
 - `docs/methodology/DECISIONS.md`, `RAPTOR-SKILL.md` — прошлые изменения.
 
 ## Скоринг
@@ -51,16 +54,44 @@ routing.
 **Процесс:** выполнение действий ретро, вырождение церемоний, число
 вмешательств человека, время в blocked.
 
+## Контекст, навигация, свежесть
+
+Оценка — по конечному состоянию и чекпоинтам, а не по «правильному пути».
+Другой маршрут, приведший к полному и свежему результату, — успех; маршрут
+«по инструкции», оставивший stale-доки, — провал. Не измерено — писать
+`not measured`, не выводить вывод.
+
+| Метрика | Как считаем | Порог | Источник |
+|---|---|---:|---|
+| Discovery | агент назвал phase/sprint/task по `.scrum/README.md` + brief с первой попытки / все старты | ≥ 90% (pilot ≥ 80%) | read-back, транскрипты |
+| Activation | агент открыл brief + change + DoD до первой правки / задачи | ≥ 90% | read-back, транскрипты |
+| Task success | AC выполнены, merge без rework / задачи | ≥ 80% | board, PR, review |
+| Context efficiency | файлов прочитано до первой правки; токены/задача | ≤ 8 файлов; ≤ 1.5× baseline | транскрипты, budget |
+| Errors/recovery | потерянные артефакты; время восстановления | 0; ≤ 1 цикл | events, report |
+| Durable brief/handoff | файлы в `tasks/<id>/` / задачи | 100% | filesystem |
+| Trace completeness | task → change → PR → review → evidence → status / задачи | 100% | sprint.md, board, events |
+| Map freshness | границы фаз с обновлённым README / границы | 100% | README, state |
+| Drift | unresolved drift-находки / спринт | 0 | reviews |
+| Stale claims | обещания теста/статуса без ссылки / спринт | 0 на close | reviews, docs |
+| Rework из-за контекста | задачи с переделкой из-за неверного brief/карты / задачи | ≤ 10% | retro, events |
+| Broken links | битые ссылки в карте/шаблонах | 0 | link check |
+
+Триггеры вне графика: discovery или activation < 80%, stale claims > 0 на
+close, потерян brief/handoff, trace < 90%, rework из-за контекста > 20%,
+карта отставала больше одной границы фазы.
+
 ## Метод
 
 1. Проверить готовность; выбрать режим.
 2. Собрать факты из логов и артефактов; отдельно — внедрение
    методологий; каждое число — со ссылкой.
-3. Сравнить с baseline прошлого аудита (если есть).
-4. Найти 1–3 системные находки, а не список из 30.
-5. Для каждой: root cause, proposal, owner, метрика, ожидаемый эффект.
-6. Записать отчёт; изменения — через ADR/PR, не в спринте.
-7. В следующем аудите проверить, сработало ли.
+3. Проверить контекст: discovery/activation, durable-артефакты, trace,
+   README freshness, drift/stale claims, rework из-за контекста.
+4. Сравнить с baseline прошлого аудита (если есть).
+5. Найти 1–3 системные находки, а не список из 30.
+6. Для каждой: root cause, proposal, owner, метрика, ожидаемый эффект.
+7. Записать отчёт; изменения — через ADR/PR, не в спринте.
+8. В следующем аудите проверить, сработало ли.
 
 ## Выход
 
@@ -99,6 +130,10 @@ routing.
 - Аудит, который сам правит промпты посреди спринта.
 - Аудит, который хвалит сам себя.
 - Роль, которая не дала эффекта за 2 аудита, но осталась.
+- Оценка «агент шёл правильным путём» вместо конечного состояния.
+- Discovery/activation не измерены, но объявлены «нормальными».
+- Аудит не проверяет durable brief/handoff и trace.
+- Stale claims и drift без owner.
 
 ## Kill criteria
 

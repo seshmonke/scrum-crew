@@ -1,7 +1,14 @@
 # PR: <поведение, не файлы>
 
+> **Context:** `status: active` · `sprint: NN` · `task: <id>` ·
+> `change: <id | No spec change: причина>` · links: brief/report/evidence
+
 ## Задача
 
+- Task:
+- Brief:
+- Report:
+- Evidence:
 - PBI:
 - Change:
 - Спринт:
@@ -16,6 +23,20 @@
 ```
 openspec show <change> --diff
 ```
+
+Или `No spec change: <причина>`.
+
+## Doc change
+
+- Host-файл: … (обновлён) или `No doc change: <причина>`.
+- Status: `plan` → `active` в этом PR; `done` — после merge/verify.
+
+## Drift
+
+- [ ] Нет старых имён/путей/API.
+- [ ] Доки не описывают будущее как текущее.
+- [ ] Обещание теста = ссылка на тест.
+- [ ] Код и чистовик совпадают.
 
 ## TDD evidence
 
@@ -74,3 +95,12 @@ Feature flag / revert / migration rollback.
 ## Скриншоты / замеры
 
 - …
+
+## Trace
+
+`task → change → PR → review → evidence → status`:
+- Task:
+- Change:
+- Review:
+- Evidence:
+- Status:

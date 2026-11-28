@@ -1,5 +1,9 @@
 # Retro: Спринт N
 
+> **Context:** `status: active` · `updated: YYYY-MM-DD` · `owner: SM` ·
+> `sprint: NN` · `task: —` · `change: —` ·
+> links: [sprint](sprint.md) · [daily](daily.md) · [review](review.md)
+
 ## Что сработало
 
 - …

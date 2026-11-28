@@ -4,11 +4,16 @@
 
 ## Файл спринта
 
-`docs/tasks/NN-краткое.md` по шаблону `assets/sprint.md`.
+`.scrum/sprints/NN/sprint.md` по шаблону `assets/sprint.md`.
 
 Обязательно: цель одной фразой, задачи-чекбоксы, `Change:` для
-behavior-changing PBI, `owns:`, evidence, «Проверка владельцем», риски,
-«Ход фаз», итоги.
+behavior-changing PBI, `owns:`, evidence, trace-таблица
+`task → change → PR → review → evidence → status`, «Проверка владельцем»,
+риски, «Ход фаз», итоги.
+
+Рядом — `.scrum/README.md` (карта входа) и `tasks/<id>/` с brief/report/
+handoff/evidence. `docs/tasks/INDEX.md` ссылается на файл спринта; старые
+`docs/tasks/NN-*.md` остаются историей, новый канон — `.scrum/sprints/NN/`.
 
 После закрытия файл остаётся историей.
 
@@ -23,11 +28,14 @@ behavior-changing PBI, `owns:`, evidence, «Проверка владельце�
    Architect: contract; для T2 — threat model; DevSecOps: SLO/бюджет;
    Designer: UX.
 6. Оценка t-shirt; проверка, что влезает в 4–6 циклов.
-7. SM: файл спринта + строка в `INDEX.md`.
+7. SM: `.scrum/sprints/NN/sprint.md` + строка в `INDEX.md` +
+   `.scrum/README.md` (phase `PLANNING/READY`, ссылки).
 8. `openspec validate <change> --strict` по каждому.
 9. Записать риски, зависимости, `owns:`.
+10. На задачу — durable-папку и `brief.md` по `assets/brief.md`; read-back
+    до старта.
 
-Выход: Goal, Sprint Backlog, changes, риски, evidence-формат.
+Выход: Goal, Sprint Backlog, changes, риски, evidence-формат, brief'ы.
 T0: TDD/ATDD/e2e/archive не применяются; `verify` + проверка
 ссылок/фактов.
 Направление пусто — стоп и вопрос.
@@ -39,34 +47,45 @@ on-demand шляпу **только на этот PBI**: Growth/Content, Support
 
 ## Дейлик
 
-До синка — `assets/daily.md`, 3 строки от активных.
+До синка — `assets/daily.md`, 3 строки от активных; артефакты — в
+durable-папке, не в чате.
 Синк 10 минут:
-1. SM идёт по доске.
-2. Говорят только WIP и блокеры.
-3. Решение: продолжить / перепланировать / эскалировать.
-4. Записать impediments и план следующего цикла.
+1. SM сверяет `.scrum/README.md` с `state.json`/`board.json`; битая
+   ссылка — impediment.
+2. SM идёт по доске.
+3. Говорят только WIP и блокеры.
+4. Проверить brief/report/evidence у активных задач.
+5. Решение: продолжить / перепланировать / эскалировать.
+6. Записать impediments и план следующего цикла.
 
 Запрещено: пересказ диффа, статус-отчёт, обсуждение вне Goal.
 
 ## Сборка
 
-1. **RED:** тест на AC/дефект падает по ожидаемой причине.
-2. **GREEN:** минимальный код; тест и полный suite зелёные.
-3. **REFACTOR:** без изменения поведения; тесты остаются зелёными.
-4. Evidence — в `task.md`/PR, включая e2e главного сценария; для T2 —
-   артефакты текущей волны.
-5. Merge только после проверки evidence: нет RED/T2-артефакта — не мержится.
+1. **Brief + read-back:** objective/AC/owns/контракты/non-goals/output
+   format/tools/evidence/stop conditions; «Понял: … Делаю: …».
+2. **RED:** тест на AC/дефект падает по ожидаемой причине.
+3. **GREEN:** минимальный код; тест и полный suite зелёные.
+4. **REFACTOR:** без изменения поведения; тесты остаются зелёными.
+5. Evidence — в `.scrum/sprints/NN/tasks/<id>/evidence/` и `report.md`,
+   включая e2e главного сценария; для T2 — артефакты текущей волны.
+6. Worker пишет `handoff.md`; координатору — резюме + ссылка.
+7. Merge только после проверки evidence: нет RED/T2-артефакта или
+   doc-change — не мержится.
 
 ## Обзор
 
 1. Демо только Done-инкремента на preview.
-2. QA прогоняет ATDD-сценарий; reviewer подтверждает RED-evidence и
-   T2-гейты текущей волны.
-3. Специалисты — по строке: design / security / perf / a11y.
-4. User Proxy — гипотезы с пометкой.
-5. PO — ACCEPT/REJECT с причиной.
-6. Новые задачи — в бэклог.
-7. Записать `assets/review.md`.
+2. QA прогоняет ATDD-сценарий; reviewer читает brief/report/evidence/PR/
+   diff и подтверждает RED-evidence и T2-гейты текущей волны.
+3. Drift-проверка: старые имена, будущее как текущее, обещание теста без
+   ссылки, код vs чистовик, `No doc change`.
+4. Специалисты — по строке: design / security / perf / a11y.
+5. User Proxy — гипотезы с пометкой.
+6. PO — ACCEPT/REJECT с причиной.
+7. Новые задачи — в бэклог.
+8. Записать `assets/review.md` и `.scrum/reviews/NN-<task>.md` с task id и
+   PR.
 
 ## Ретро
 
@@ -79,13 +98,16 @@ on-demand шляпу **только на этот PBI**: Growth/Content, Support
 
 1. Все задачи `[x]`; `verify` зелёный.
 2. `openspec validate --all --strict`; changes заархивированы.
-3. Коммит закрытия → пуш → CI.
-4. Красный CI — стоп, следующий спринт не начинать.
-5. `state.json` → `CLOSED`; событие в `events.jsonl`.
-6. Debt: P3 имеют owner/срок; debt-бюджет записан.
-7. Postmortem P0/P1: actions с owner/сроком; закрытие проверено.
-8. Исключения закрыты или просрочены → P1-долг.
-9. Следующий спринт — только по команде.
+3. Trace-таблица полна: task → change → PR → review → evidence → status.
+4. Brief/report/handoff/evidence — в durable-папках; `/tmp` не использован.
+5. Коммит закрытия → пуш → CI.
+6. Красный CI — стоп, следующий спринт не начинать.
+7. `state.json` → `CLOSED`; событие в `events.jsonl`; `.scrum/README.md` →
+   `CLOSED/done` и ссылка на итоговый `sprint.md`.
+8. Debt: P3 имеют owner/срок; debt-бюджет записан.
+9. Postmortem P0/P1: actions с owner/сроком; закрытие проверено.
+10. Исключения закрыты или просрочены → P1-долг.
+11. Следующий спринт — только по команде.
 
 ## Задачный конвейер
 
@@ -108,8 +130,12 @@ proposed → ready → claimed → in_progress → in_review
 
 ## Бриф и передача
 
-- Бриф задачи — `assets/task.md`.
-- Передача — `assets/handoff.md` + read-back получателя.
+- Бриф задачи — `assets/brief.md`, durable-путь
+  `.scrum/sprints/NN/tasks/<id>/brief.md`.
+- Отчёт worker'а — `assets/report.md`, путь `.../report.md`; координатору —
+  резюме + ссылка.
+- Передача — `assets/handoff.md` + read-back получателя, путь
+  `.../handoff.md`.
 - Вопрос владельцу — `.scrum/questions/NN.md`:
 
 ```markdown
