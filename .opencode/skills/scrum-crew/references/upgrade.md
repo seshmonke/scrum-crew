@@ -324,6 +324,34 @@ rm -rf .opencode/skills/scrum-crew
 
 После этого дальше работает обычная процедура из этого документа.
 
+## 9.1. Миграция v0.4.0 → v0.5.0
+
+v0.5.0 добавляет карту входа, durable task workspace и протокол свежести.
+Это migration, а не автоматическое переписывание проекта.
+
+1. Установить v0.5.0 установщиком без `--with-scaffold`.
+2. Проверить новые файлы скилла: `references/context.md`,
+   `assets/context.md`, `assets/brief.md`, `assets/report.md`.
+   `assets/task.md` остаётся deprecated-заглушкой; новые брифы — только
+   `brief.md`.
+3. Создать `.scrum/README.md` из `assets/context.md`, если его нет.
+   Заполнить phase/sprint/goal/next gate/active tasks и ссылки. Если файл
+   уже есть — слить вручную, не перезаписывать.
+4. Для активных задач создать `.scrum/sprints/NN/tasks/<id>/` и перенести
+   brief/handoff/report/evidence из `/tmp` или worktree. Если worktree уже
+   удалён — восстановить из `sprint.md`, PR и диффа, пометить источник и
+   `status: done`/`active` по факту.
+5. Старые `docs/tasks/NN-*.md` не перемещать без решения владельца; они
+   остаются историей. Новый файл спринта — `.scrum/sprints/NN/sprint.md`,
+   `INDEX.md` ссылается на него.
+6. `report.json` (если использовался) заменить на `report.md`; старый файл
+   не удалять без проверки, но канон — `report.md`.
+7. Добавить контекстные шапки новым и изменяемым докам. Архивы и старые
+   спринты массово не переписывать.
+8. Проверить ссылки по разделу 6; `git diff --check`; `git status` — только
+   `.opencode/`, `.scrum/README.md`, новые task-папки и разрешённые доки.
+9. Миграция — отдельным PR между спринтами; не смешивать с PBI.
+
 ## 10. Красные флаги
 
 - обновление запущено в спринте;
@@ -338,4 +366,6 @@ rm -rf .opencode/skills/scrum-crew
   конфигов;
 - `openspec validate` или `verify` красные, а обновление всё равно
   коммитится;
-- нет чистого git и rollback.
+- нет чистого git и rollback;
+- v0.5.0: `.scrum/README.md` не создан, brief/handoff остались в `/tmp`,
+  новые брифы пишутся не в `brief.md`, архивы переписываются массово.

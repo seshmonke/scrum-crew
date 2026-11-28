@@ -8,6 +8,9 @@ description: Ведёт веб-разработку по Scrum командой 
 Оркестратор — эта сессия. Роли — субагенты. Состояние — `.scrum/`.
 Поведение — `openspec/`. Правила проекта — `AGENTS.md`.
 
+Вход: `AGENTS.md` → `.scrum/README.md` → `brief.md` задачи. Карта, а не
+весь репозиторий: 3–5 ссылок под задачу. Детали — `references/context.md`.
+
 ## Режимы
 
 | Режим | Команда | Что делает |
@@ -28,13 +31,14 @@ description: Ведёт веб-разработку по Scrum командой 
    non-goals, риски. Выход — `docs/concept/product.md`.
 2. **Фундамент:** стек, ADR, `verify`, CI, preview, секреты.
 3. **Delivery:** репозиторий, защищённый `main`, review-gate, merge train,
-   `.scrum/`, `openspec init`.
+   `.scrum/` (state, board, budget, events, `README.md`), `openspec init`.
 4. **Первый change:** walking skeleton — healthcheck → экран → API → БД →
    preview. Не sprint 0 и не «вся инфраструктура».
 
 Гейт: владелец подтвердил Goal, сценарий, метрику, non-goals; `verify`
-работает; preview открывается; первый change создан. Только после этого —
-команда на Sprint 1.
+работает; preview открывается; первый change создан; `.scrum/README.md`
+существует, фаза `INIT` и ссылки живые. Только после этого — команда на
+Sprint 1.
 
 ## 0.5. Обновление скилла
 
@@ -50,11 +54,17 @@ description: Ведёт веб-разработку по Scrum командой 
 
 ## 1. Прочитать до спринта
 
-`AGENTS.md` → `docs/tasks/INDEX.md` → `docs/quality/methodologies.md` →
-`docs/quality/dod.md` → `openspec list` → `.scrum/state.json` → `verify`.
+1. `AGENTS.md` — проект, команды, инварианты.
+2. `.scrum/README.md` — phase, sprint, goal, next gate, active tasks и
+   5–6 ссылок «начни здесь».
+3. Дальше — только по карте: `state.json` → `board.json` → `sprint.md` →
+   change → `docs/quality/dod.md`.
+4. Для задачи — `brief.md` + change + 2–5 ссылок. Не весь репозиторий,
+   не `events.jsonl` как нарратив, не `/tmp`.
 
 Чего нет — спросить владельца. Продукт, стек и состав спринта не
-выдумывать.
+выдумывать. Карта устарела или ссылка битая — стоп и починить до работы.
+Церемонии и гейты — `references/cycle.md`.
 
 ## 2. Роли
 
@@ -124,8 +134,9 @@ PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CLOSED
    tasks).
 5. Architect — границы capability; QA — сценарии; White Hacker — abuse
    cases; Designer — UX.
-6. SM фиксирует спринт и строку в `INDEX.md`.
-7. `openspec validate <change> --strict` по каждому.
+6. SM фиксирует `.scrum/sprints/NN/sprint.md`, `.scrum/README.md` и
+   строку в `INDEX.md`.
+7. `openspec validate <change> --strict` по каждому; на задачу — brief.
 
 Направление пусто — стоп и вопрос владельцу.
 
@@ -133,33 +144,64 @@ PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CLOSED
 
 Волны: контракты → фундамент → вертикальные срезы → полировка.
 
+Durable-папка задачи — `.scrum/sprints/NN/tasks/<id>/`: `brief.md`,
+`handoff.md`, `report.md`, `evidence/`. Worktree — runtime, не источник
+истины; `/tmp` и чат запрещены.
+
 На задачу:
-0. RED до кода: тест на AC/дефект падает по ожидаемой причине.
-1. Worktree + `task.md` с Tier, артефактами и RED-требованием.
-2. Owner-субагент: role card + brief + контракты.
-3. Отчёт: статус, файлы, команды, вывод, RED/GREEN, блокеры.
-4. Оркестратор сам прогоняет `verify`.
-5. Reviewer-субагент (не автор).
-6. Rebase → verify → evidence check → squash-merge → board.
-7. Снять lease, записать событие.
+0. Brief по `assets/brief.md`: objective, AC, owns, контракты, non-goals,
+   output format, tools/sources, evidence, stop conditions.
+1. Owner-субагент: role card + brief + 2–5 ссылок; read-back «Понял: …
+   Делаю: …» до первой правки. Worktree и durable-папка уже созданы.
+2. RED до кода: тест на AC/дефект падает по ожидаемой причине.
+3. Worker пишет `report.md`, `handoff.md`, `evidence/`; координатору
+   возвращает резюме ≤ 10 строк + ссылки, не весь текст.
+4. Оркестратор сам прогоняет `verify`; evidence-check по AC.
+5. Reviewer (не автор) читает brief, report, evidence, PR и diff;
+   проверяет drift и «обещание теста = ссылка на тест».
+6. Rebase → verify → evidence check → doc-check → squash-merge → board →
+   trace.
+7. Снять lease, записать событие с task/pr/commit/artifact.
 
-Мерж без TDD/ATDD-evidence или T2-артефакта текущей волны запрещён.
+Мерж без TDD/ATDD-evidence, T2-артефакта текущей волны или doc-change
+запрещён.
 
-12 слотов: contract baseline, `owns:`, shared-file czar, contract sentinel,
-batch merge, circuit breaker (15% конфликтов / 30 мин красного main / 8 PR
-в ревью → WIP 6). Детали — `references/orchestrator.md`.
+### Conflict-aware WIP
+
+- В работе 1–2 код-задачи; WIP 6 — потолок, не цель.
+- Параллель — только для независимых задач: нет общих файлов и
+  контрактов.
+- Общий файл/контракт — последовательно или дробить; признак конфликта —
+  сигнал планировщику, а не повод для rebase-лотереи.
+- 12 слотов: contract baseline, `owns:`, shared-file czar, contract
+  sentinel, batch merge, circuit breaker (15% конфликтов / 30 мин красного
+  main / 8 PR в ревью → WIP 1–2, не выше 6). Детали —
+  `references/orchestrator.md`.
 
 ## 6. Дейлик
 
 До синка — 3 строки в `daily.md` (`assets/daily.md`): сделано с evidence /
-следующее / блокер. Синк 10 минут: SM идёт по доске, говорят только WIP и
-блокеры. Выход — план следующего цикла.
+следующее / блокер. Артефакты задачи — в durable-папке, не в чате и не в
+`/tmp`.
+
+Синк 10 минут:
+1. SM сверяет карту: `.scrum/README.md` — phase/sprint/active tasks
+   совпадают с `state.json`/`board.json`; битая ссылка — impediment.
+2. SM идёт по доске; говорят только WIP и блокеры.
+3. Проверить, что у активных задач есть `brief.md`, `report.md`,
+   `evidence/`; нет — стоп и восстановить.
+4. Выход — план следующего цикла; при смене фазы — обновить карту.
 
 ## 7. Review, retro, close
 
 Review: демо Done, QA прогоняет ATDD-сценарий; reviewer проверяет, что
-тест падал без кода, и T2-гейты текущей волны. PO — ACCEPT/REJECT,
-специалисты — по строке. REJECT — в бэклог, не переделка спринта.
+тест падал без кода, и T2-гейты текущей волны. Reviewer читает brief,
+report, evidence, PR и diff, а не реконструирует картину из логов.
+
+Drift-проверка: старые имена/пути, будущее как текущее (`status: plan`),
+обещание теста без ссылки на тест, расхождение кода и чистовика,
+скопированные метрики/API. PO — ACCEPT/REJECT, специалисты — по строке.
+REJECT — в бэклог, не переделка спринта.
 
 Retro: 1–2 действия с owner; проверить прошлые действия и postmortem-actions.
 
@@ -176,6 +218,9 @@ Close: задачи `[x]`, `verify`, changes заархивированы, CI з
 - Archive: после merge, отдельным PR в конце цикла.
 - Одна capability — один активный change на волну.
 - Багфикс/рефакторинг/инфра/косметика — без change, строка причины в PR.
+- Change status: `plan` → `active` → `done`/`superseded`; `plan` — не
+  текущая правда. Трассировка: `task → change → PR → review → archive`.
+- Archive после merge; review-артефакт и task id связаны с change.
 
 Подробно: `references/openspec.md`.
 
@@ -216,29 +261,61 @@ Read-only к коду/скиллу/спекам; единственная зап
 доказательство, root cause, proposal, owner, метрика. Отчёт —
 `docs/quality/audits/NN-*.md` по `assets/audit.md`.
 Изменения — через ADR/PR, не в спринте. Нет эффекта два аудита — удалить
-роль. Подробно — `references/audit.md`.
+роль.
+
+Метрики контекста: discovery/activation (нашёл ли агент вход), task
+success, efficiency, errors/recovery, drift, durable brief/handoff,
+trace completeness, rework из-за контекста, stale claims. Оценка — по
+конечному состоянию и чекпоинтам, не по «правильному пути». Подробно —
+`references/audit.md`.
 
 ## 11. Куда писать
 
-| Что | Куда |
-|---|---|
-| Goal, PBI, план | `docs/tasks/NN-*.md` |
-| Дейлик / обзор / ретро | `daily.md` / `review.md` / `retro.md` |
-| Поведение | `openspec/specs/`, `openspec/changes/` |
-| Зачем / как / вид / проверка | `docs/concept|stack|design|quality/` |
-| Состояние | `.scrum/state.json`, `board.json`, `events.jsonl` |
+| Что | Куда | Кто |
+|---|---|---|
+| Карта входа | `.scrum/README.md` | SM/оркестратор, границы фаз |
+| Goal, PBI, план, trace | `.scrum/sprints/NN/sprint.md` | SM/PO |
+| Brief / report / handoff / evidence | `.scrum/sprints/NN/tasks/<id>/` | оркестратор / worker |
+| Дейлик / обзор / ретро | `.scrum/sprints/NN/daily.md` / `review.md` / `retro.md` | SM |
+| Review-артефакт | `.scrum/reviews/NN-<task>.md` | reviewer |
+| Поведение | `openspec/specs/`, `openspec/changes/` | PO/Architect/QA |
+| Зачем / как / вид / проверка | `docs/concept`, `docs/stack`, `docs/design`, `docs/quality/` | владельцы зон |
+| Бэклог / направление | `docs/tasks/INDEX.md`, `backlog.md` | PO |
+| Состояние | `.scrum/state.json`, `board.json`, `events.jsonl` | только оркестратор |
 
-Один факт — один файл. Чистовик без «возможно».
+Правила:
+
+- Один факт — один файл; остальное — ссылки. Чистовик без «возможно».
+- `/tmp`, чат и worktree не источник истины; worktree — runtime.
+- Brief/handoff/report переживают рестарт машины: они в `.scrum/`.
+- В PR задачи — правка host-файла или `No doc change: <причина>`.
+- Событие в `events.jsonl` несёт `task`, `pr`, `commit`, `artifact`, если
+  применимо.
 
 ## 12. Чек-лист
 
 - [ ] Init закрыт: Goal, сценарий, метрика, non-goals.
 - [ ] `verify` работает; контракты смержены.
 - [ ] У PBI есть change или «no spec change».
+- [ ] `.scrum/README.md` свежая: phase/sprint/active tasks совпадают с
+      `state.json`/`board.json`; ссылки живые.
+- [ ] У задачи durable-папка `.scrum/sprints/NN/tasks/<id>/` с brief,
+      report, handoff, evidence; не `/tmp`.
+- [ ] Brief содержит objective/AC/owns/контракты/non-goals/output format/
+      tools/evidence/stop conditions; read-back записан.
+- [ ] Worker вернул резюме + ссылку; координатор не пересказывает весь
+      отчёт.
 - [ ] У задачи worktree, `owns:`, owner, evidence.
 - [ ] `verify` прогнан оркестратором.
-- [ ] Ревьюер — не автор.
+- [ ] Ревьюер — не автор; читал brief/report/evidence/PR/diff, не логи.
 - [ ] Мерж последовательный; main зелёный.
+- [ ] В review есть drift-проверка: старые имена, будущее как текущее,
+      обещание теста = ссылка на тест.
+- [ ] В PR — правка host-файла или `No doc change: <причина>`.
+- [ ] Trace-таблица в `sprint.md` полна: task → change → PR → review →
+      evidence → status; события несут task/pr/commit/artifact.
+- [ ] WIP conflict-aware: 1–2, потолок 6; общие файлы/контракты —
+      последовательно.
 - [ ] Change заархивирован; спека обновлена.
 - [ ] Дейлик, review, retro записаны.
 - [ ] Tier T0/T1/T2 записан в PBI/change; T0 не требует TDD/ATDD, e2e
@@ -259,7 +336,8 @@ Read-only к коду/скиллу/спекам; единственная зап
 
 ## 13. Файлы
 
-`references/`: init, upgrade, scrum, roles, cycle, orchestrator,
+`references/`: init, upgrade, scrum, roles, cycle, orchestrator, context,
 communication, openspec, git-quality, failure-modes, audit.
-`assets/`: sprint, daily, review, retro, task, handoff, pr, audit.
+`assets/`: context, brief, report, sprint, daily, review, retro, handoff,
+pr, audit; `task` — deprecated stub.
 `VERSION`: установленная версия скилла.

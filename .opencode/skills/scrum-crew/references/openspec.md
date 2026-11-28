@@ -40,6 +40,24 @@ openspec validate --all --strict
 | Review | diff требований + демо |
 | Retro | аудит drift |
 
+## Статус change
+
+Единый набор: `plan | active | done | superseded`.
+
+| Статус | Когда | Где виден |
+|---|---|---|
+| `plan` | proposal написан, DoR/apply ещё нет; не текущая правда | шапка `proposal.md`, sprint trace |
+| `active` | DoR пройден, идёт apply/PR | шапка `proposal.md`, board |
+| `done` | merge + archive; `specs/` обновлён | `changes/archive/`, sprint trace |
+| `superseded` | заменён другим change; ссылка на замену | `changes/archive/`, proposal |
+
+- `plan` → `active` переводит PR, который начинает реализацию; `done` —
+  после archive.
+- Статус change — один факт в `proposal.md`/архиве. `design.md`,
+  `tasks.md`, sprint trace и review ссылаются, не дублируют.
+- «current» в старых текстах = `active`; других значений не используем.
+- `active` change без task id, PR или review-артефакта — trace-разрыв.
+
 ## Поток
 
 1. **Explore** (опционально): варианты, риски, что неизвестно.
@@ -67,7 +85,8 @@ openspec validate --all --strict
       property/mutation — по волне.
 - [ ] T0: `No spec change`; change/archive не требуются.
 - [ ] `design.md`, если контракт/схема/authz/деньги/PII.
-- [ ] `tasks.md` — чекбоксы.
+- [ ] `tasks.md` — чекбоксы, привязка к task id.
+- [ ] `proposal.md` имеет `Status: plan` и ссылку на sprint/brief.
 - [ ] `openspec validate <id> --strict` зелёный.
 - [ ] PO/Architect/QA подтвердили.
 
@@ -85,7 +104,8 @@ openspec validate --all --strict
 - [ ] T0: `No spec change`; archive не требуется.
 - [ ] `verify-change` пройден.
 - [ ] `openspec validate --all --strict` зелёный.
-- [ ] Change заархивирован; `specs/` обновлён.
+- [ ] Change заархивирован; `specs/` обновлён; статус `done`.
+- [ ] Trace полон: task → change → PR → review → evidence → archive.
 - [ ] Нет поведения в коде без спеки (или явное исключение).
 
 ## 12 параллельных changes
@@ -100,6 +120,39 @@ openspec validate --all --strict
 - `INFO` про archive-конфликт не валит сборку, но требует решения
   Architect.
 - Staggered start: контракты → фундамент → зависимые срезы → полировка.
+
+## Трассировка
+
+Одна строка на задачу в `sprint.md`:
+
+```markdown
+| Task | Change | PR | Review | Evidence | Archive |
+|---|---|---|---|---|---|
+| 03.2 | `03-checkout` | #118 | `reviews/03-03.2.md` | `tasks/03.2/evidence/` | `archive/2026-11-28-03-checkout` |
+```
+
+- Один behavior-changing PBI — один change; несколько задач могут
+  реализовывать один change, каждая со своим brief и task id.
+- Review-артефакт содержит task id и PR; иначе он не связан с change.
+- Archive-PR ссылается на task id, review и PR реализации.
+- Change без task, task без change (или `No spec change`) — trace-разрыв;
+  чинится до close.
+
+## Drift-проверка при ревью
+
+Проверять по конечному состоянию, не по «правильному пути»:
+
+- [ ] Нет старых имён файлов, модулей, путей, API.
+- [ ] Доки не описывают будущее как текущее: плановое — `status: plan`,
+      а не present tense.
+- [ ] Обещание теста («покрыто unit-тестом») содержит ссылку на тест;
+      иначе это claim, а не факт.
+- [ ] Код и чистовик совпадают; статус `plan/active/done` не врёт.
+- [ ] Метрики, размеры, API и списки не скопированы — ссылка на источник.
+- [ ] В PR — правка host-файла или `No doc change: <причина>`.
+- [ ] Trace task → change → PR → review → evidence → status полон.
+
+Drift-находка — P1/P2 с owner; на close не должно остаться unresolved.
 
 ## Порог spec-worthy
 
@@ -155,3 +208,9 @@ openspec validate --all --strict
 - Параллельная архивация.
 - OpenSpec вместо ADR или вместо тестов.
 - Change на опечатки.
+- Доки описывают будущие модули как существующие.
+- «Покрыто тестом» без ссылки на тест.
+- Change archived, а task в sprint trace всё ещё `active`.
+- `plan` change принимают как текущую правду.
+- Метрики/API скопированы в спеку вместо ссылки на источник.
+- Trace без task id, PR или review-артефакта.

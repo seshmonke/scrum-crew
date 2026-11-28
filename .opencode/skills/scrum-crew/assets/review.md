@@ -1,15 +1,34 @@
-# Review: Спринт N
+# Review: Спринт NN / Task <id>
+
+> **Context:** `status: active` · `updated: YYYY-MM-DD` · `owner: reviewer` ·
+> `sprint: NN` · `task: <id>` · `change: <id | No spec change: причина>` ·
+> links: [brief](../sprints/NN/tasks/<id>/brief.md) ·
+> [report](../sprints/NN/tasks/<id>/report.md) · [PR](…)
 
 ## Инкремент
 
-- Preview:
-- Изменения (changes):
+- Task:
 - PR:
+- Change:
+- Brief:
+- Report:
+- Evidence:
+- Preview:
 
 ## Демо-сценарий
 
 1. …
 2. …
+
+## Drift check
+
+- [ ] Нет старых имён/путей/API.
+- [ ] Доки не описывают будущее как текущее (`status: plan`).
+- [ ] Обещание теста = ссылка на тест.
+- [ ] Код и чистовик совпадают.
+- [ ] Метрики/размеры/API не скопированы, а взяты из источника.
+- [ ] В PR — host-doc обновлён или `No doc change: <причина>`.
+- [ ] Trace task → change → PR → review → evidence → status полон.
 
 ## Вердикты
 
@@ -27,6 +46,8 @@
 - Долг:
 - Postmortem:
 - Исключения:
+- Drift:
+- Durable artifacts:
 Вердикт: PASS / REQUEST_CHANGES
 
 ## Решение PO
@@ -37,4 +58,4 @@ ACCEPT / REJECT
 
 ## Новые задачи
 
-- [ ] P1. … (источник: review N)
+- [ ] P1. … (источник: review N, task <id>)

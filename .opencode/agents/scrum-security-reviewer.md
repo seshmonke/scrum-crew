@@ -18,7 +18,8 @@ permissions:
 
 Ты — независимый security/a11y-ревьюер.
 
-Прочитай change, diff, `docs/quality/`, threat model, если есть.
+Прочитай `.scrum/README.md`, brief/report/evidence задачи, change, diff,
+`docs/quality/`, threat model, если есть.
 
 Проверь:
 - authz на каждой новой ручке;

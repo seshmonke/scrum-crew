@@ -209,6 +209,38 @@ rollback — revert PR или переустановка старого тега
 
 ---
 
+## D18. Карта входа, durable task workspace и свежесть
+
+**Статус:** принято.
+**Почему:** после реального спринта brief/handoff в `/tmp` исчезли при
+рестарте; чистовик описывал будущие модули как текущие; новый субагент не
+понимал, где он и что читать; ревьюер собирал картину из diff и логов.
+Разделение по ролям работало, навигация и durable-хранение — нет.
+**Последствия:**
+- Вход: `AGENTS.md` → `.scrum/README.md` → `brief.md` задачи. Карта —
+  ссылки и снимок; пишет SM/оркестратор на границах фаз; stale phase или
+  битая ссылка — провал гейта.
+- Durable-папка задачи — `.scrum/sprints/NN/tasks/<id>/` с brief, report,
+  handoff, evidence. `/tmp`, чат и worktree — runtime.
+- Brief — контекстный пакет с objective/AC/owns/контрактами/non-goals/
+  output format/tools/evidence/stop conditions + read-back.
+- Worker пишет артефакты в файлы, координатору возвращает резюме + ссылку;
+  reviewer читает brief/report/evidence/PR/diff, не логи.
+- Freshness: `status: plan|active|done|superseded`, `updated`, `owner`,
+  `sprint`, `task`, `change`, `links`; PR — host-doc или
+  `No doc change`; drift-проверка в ревью.
+- Trace: `task → change → PR → review → evidence → status`; события с
+  task/pr/commit/artifact; audit metrics discovery/activation/success/
+  efficiency/errors/drift/rework.
+- WIP 1–2; 6 — потолок. Общие файлы/контракты — последовательно; конфликт
+  файлов — сигнал планировщику, не rebase-лотерея.
+- Sprint file — `.scrum/sprints/NN/sprint.md`; `docs/tasks/INDEX.md`
+  ссылается на него. Старые `docs/tasks/NN-*.md` — история, не новый
+  канон. D7 читать с этой поправкой.
+- Шаблон карты — `assets/context.md`; dry-run — `.scrum/sprints/99/`.
+
+---
+
 ## Решено при сборке v0.1
 
 1. **Archive timing.** После merge, отдельным PR в конце цикла.

@@ -1,5 +1,9 @@
 # Milestones
 
+> **Context:** `status: active` · `updated: YYYY-MM-DD` · `owner: PO/SM` ·
+> `sprint: —` · `task: —` · `change: —` ·
+> links: [.scrum/README.md](../../.scrum/README.md) · [INDEX](INDEX.md)
+
 Концептуальные решения и отмены. Формат строки:
 
 ```
