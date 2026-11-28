@@ -4,7 +4,7 @@
 Одна команда, 15 ролей, спринт 4–8 часов, OpenSpec для поведения,
 монорепозиторий, последовательный merge train.
 
-Статус: **v0.6.0**. Продукт и стек не входят — они определяются на стадии
+Статус: **v0.6.1**. Продукт и стек не входят — они определяются на стадии
 Init в каждом проекте.
 
 ## Что даёт
@@ -26,8 +26,8 @@ Init в каждом проекте.
 - **15 ролей:** PO, SM, Architect, Fullstack, Frontend, Backend, Data, QA,
   Tester, DevSecOps, White Hacker, Designer, Copywriter, User Proxy,
   Delivery.
-- **Copywriter:** голос, сообщения и тексты всех поверхностей; гейт против
-  слопа и `scripts/slop-check.sh`.
+- **Copywriter:** голос, сообщения и тексты всех поверхностей; журнал
+  мотивов, гейт против слопа и `scripts/slop-check.sh`.
 - **OpenSpec:** каждый behavior-changing PBI = change с proposal, delta
   specs, design и tasks; ревью намерения до кода.
 - **12 слотов в коде** с contract baseline, file ownership, shared-file
@@ -155,7 +155,8 @@ openspec init --tools opencode --scope project
 В OpenCode: команда «обнови скилл» → режим Upgrade. Подробная процедура —
 `.opencode/skills/scrum-crew/references/upgrade.md`; migration notes
 v0.4.0 → v0.5.0 — в `CHANGELOG.md` и разделе 9.1 `upgrade.md`.
-v0.6.0 — роль Copywriter и анти-слоп-гейт, migration не требуется.
+v0.6.1 — журнал мотивов и `motif-check.sh`, migration не требуется.
+v0.6.0 — роль Copywriter и анти-слоп-гейт.
 
 Установленная версия — `.opencode/skills/scrum-crew/VERSION`. Установщик
 копирует скилл и агентов, но не трогает `.scrum/`, `openspec/`, `docs/`
@@ -185,6 +186,7 @@ v0.6.0 — роль Copywriter и анти-слоп-гейт, migration не т�
       audit.md            # мета-аудит: готовность, скоринг, находки
     scripts/
       slop-check.sh       # проверка готового текста на штампы и давление
+      motif-check.sh      # повторяющиеся мотивы по корпусу текстов
     assets/               # context, brief, report, sprint, daily, review,
                           # retro, handoff, pr, audit; task — deprecated stub
   agents/
@@ -252,7 +254,7 @@ AGENTS.md                                  проект
 | DevSecOps / SRE | CI, секреты, IaC, наблюдаемость |
 | White Hacker | threat model, abuse cases, red team |
 | Designer | UX/UI, дизайн-система, a11y |
-| Copywriter | голос, сообщения, тексты, анти-слоп |
+| Copywriter | голос, сообщения, тексты, мотивы, анти-слоп |
 | User Proxy | персоны, сценарии, гипотезы |
 | Delivery / PM | зависимости, риски, релизы |
 | Growth / Content | запуск, каналы, SEO, кампании; on-demand |

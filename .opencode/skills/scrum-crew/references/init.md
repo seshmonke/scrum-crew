@@ -33,6 +33,7 @@ docs/concept/product.md      Product Goal, пользователь, метри�
 docs/concept/personas.md    1–3 персоны, если нужны
 docs/concept/journey.md     главный сценарий по шагам
 docs/design/content.md      голос, словарь, запрещённые слова (Copywriter)
+docs/design/motifs.md       журнал образов и слов-подписей (Copywriter)
 ```
 
 Правила:
@@ -42,8 +43,9 @@ docs/design/content.md      голос, словарь, запрещённые �
 - Гипотезы помечаются `hypothesis`, не выдаются за факты.
 - Решение фиксируется до кода: дата, обоснование, trade-off.
 - Одно обещание и голос фиксирует Copywriter до первого текста;
-  словарь — `docs/design/content.md`. Copywriter — постоянная роль: голос
-  нужен с первого экрана.
+  словарь — `docs/design/content.md`, журнал мотивов —
+  `docs/design/motifs.md`. Copywriter — постоянная роль: голос нужен с
+  первого экрана.
 
 **Гейт:** владелец подтвердил Product Goal, пользователя, главный сценарий,
 метрику и non-goals. Без этого — стоп.

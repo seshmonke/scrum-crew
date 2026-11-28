@@ -268,7 +268,8 @@ claims. Оценка — по конечному состоянию. Подро�
 `references/`: init, upgrade, scrum, roles, copywriting, cycle,
 orchestrator, context, communication, openspec, git-quality,
 failure-modes, audit.
-`scripts/`: `slop-check.sh` — ловит штампы и давление в готовом тексте.
+`scripts/`: `slop-check.sh` — ловит штампы и давление; `motif-check.sh` —
+повторяющиеся мотивы по корпусу текстов.
 `assets/`: context, brief, report, sprint, daily, review, retro, handoff,
 pr, audit; `task` — deprecated stub.
 `VERSION`: установленная версия скилла.

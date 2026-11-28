@@ -28,6 +28,8 @@
 - [ ] Код и чистовик совпадают.
 - [ ] Для пользовательских текстов — Copywriter review и
   `scripts/slop-check.sh`.
+- [ ] Мотив и слова-подписи не повторяют предыдущие тексты;
+  `scripts/motif-check.sh` чист.
 - [ ] Метрики/размеры/API не скопированы, а взяты из источника.
 - [ ] В PR — host-doc обновлён или `No doc change: <причина>`.
 - [ ] Trace task → change → PR → review → evidence → status полон.

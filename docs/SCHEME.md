@@ -87,7 +87,7 @@ sequenceDiagram
 | Report / handoff / evidence | `.scrum/sprints/NN/tasks/<id>/` | worker |
 | Review | `.scrum/reviews/NN-<task>.md` | reviewer |
 | Поведение | `openspec/specs/`, `openspec/changes/` | PO/Architect/QA |
-| Голос и тексты | `docs/design/content.md`, `docs/design/messaging.md` | Copywriter |
+| Голос и тексты | `docs/design/content.md`, `docs/design/messaging.md`, `docs/design/motifs.md` | Copywriter |
 | Зачем / как / вид / проверка | `docs/concept`, `docs/stack`, `docs/design`, `docs/quality/` | владельцы зон |
 
 ## 5. Гейты
@@ -97,7 +97,7 @@ sequenceDiagram
 | Init | Goal, сценарий, метрика, non-goals; `verify`; preview; `.scrum/README.md` в `INIT` |
 | Planning | DoR, change/`No spec change`, Tier, `openspec validate --strict` |
 | Build | RED-evidence, `verify`, ревью не-автора, T2-артефакты текущей волны |
-| Review | Done на preview, ATDD, drift, `No doc change`/host-doc, ACCEPT/REJECT |
+| Review | Done на preview, ATDD, drift, copy/motif, `No doc change`/host-doc, ACCEPT/REJECT |
 | Close | `verify`, archive, trace полон, README → `CLOSED/done`, долг/postmortem закрыты |
 
 Гейт — команда + exit code + evidence. «Зелёно» без вывода не
