@@ -86,17 +86,10 @@ INIT → PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CL
 
 ## Контекстный пакет
 
-Агенту не даётся весь репозиторий и вся история. Даётся:
-
-- Sprint Goal (1 строка);
-- `brief.md` с objective, AC, owns, контрактами, non-goals, output
-  format, tools/sources, evidence, stop conditions;
-- 2–5 ссылок на доки/change/контракты;
-- DoD и формат evidence, включая RED/GREEN;
-- границы, стоп-условия и read-back.
-
-Никакого «прочитай весь репозиторий». Если бриф требует больше 5 ссылок —
-дробить задачу или добавлять ссылку в brief, а не в чат.
+Brief — `assets/brief.md`; принципы и пример на 3 ссылки —
+`references/context.md`. Агенту не даётся весь репозиторий: только brief,
+2–5 ссылок, DoD и read-back. Больше 5 ссылок — дробить задачу, а не лить
+в чат.
 
 ## Conflict-aware WIP
 
@@ -111,18 +104,12 @@ INIT → PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CL
 
 ## Трассировка и события
 
-В `sprint.md` — trace-таблица:
+Trace-таблица — `assets/sprint.md`; колонки task/brief/change/PR/review/
+evidence/status. `board.json` — источник истины по статусу; таблица —
+производная, расхождение — провал гейта. Каждая строка ведёт к brief,
+change, PR, review и evidence.
 
-```markdown
-| Task | Brief | Change | PR | Review | Evidence | Status |
-|---|---|---|---|---|---|---|
-| 03.2 | [brief](tasks/03.2/brief.md) | `03-checkout` | #118 | [review](../../reviews/03-03.2.md) | [evidence](tasks/03.2/evidence/) | in_review |
-```
-
-- `board.json` — источник истины по статусу; таблица — производная.
-  Расхождение — провал гейта.
-- Каждая строка ведёт к brief, change, PR, review и evidence.
-- Событие в `events.jsonl`:
+Событие в `events.jsonl`:
 
 ```json
 {"ts":"2026-11-28T10:15:00Z","type":"merge","sprint":3,"task":"03.2","pr":118,"commit":"a1b2c3d","artifact":".scrum/sprints/03/tasks/03.2/report.md","gate":"verify","exit":0}

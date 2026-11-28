@@ -50,44 +50,15 @@ AGENTS.md                                  проект: правила, ком�
 - Конфликт «карта говорит A, state говорит B» не разрешается голосованием:
   читаем state/board и чиним карту.
 
-Шаблон — `assets/context.md`.
-
-## Начни здесь
-
-| # | Что | Файл |
-|---|---|---|
-| 1 | Где я, фаза, спринт, stop | `.scrum/state.json` |
-| 2 | Задачи, owner, PR, статус | `.scrum/board.json` |
-| 3 | Goal, PBI, trace, гейты | `.scrum/sprints/NN/sprint.md` |
-| 4 | Задача, AC, owns, evidence | `.scrum/sprints/NN/tasks/<id>/brief.md` |
-| 5 | Что меняется в поведении | `openspec/changes/<id>/` или `No spec change` |
-| 6 | Что считается Done | `docs/quality/dod.md` |
-
-## Вопрос → файл
-
-| Вопрос | Файл |
-|---|---|
-| Где я и какая фаза? | `.scrum/README.md`, `.scrum/state.json` |
-| Какая задача, owner, PR? | `.scrum/board.json`, `brief.md` |
-| Что меняется? | `openspec/changes/<id>/proposal.md`, `specs/` |
-| Где evidence? | `tasks/<id>/evidence/`, `tasks/<id>/report.md` |
-| Почему так решили? | `docs/stack/adr/`, `design.md` |
-| Что было в прошлом спринте? | `.scrum/sprints/NN/`, `openspec/changes/archive/` |
-| Что считается Done? | `docs/quality/dod.md` |
-| Кто пишет карту? | SM/оркестратор; остальные читают |
+Шаблон — `assets/context.md`; там же 5–6 ссылок и таблица «вопрос → файл».
+В reference не дублируй: карта в проекте — один файл.
 
 ## Что не читать
 
-- `events.jsonl` как нарратив. Только `tail`, `grep` по конкретному
-  событию, task id или PR.
-- Весь репозиторий «на всякий случай». Это не контекст, а шум.
-- `/tmp`, чат и логи сессий как источник истины. Durable-путь — только
-  `.scrum/sprints/NN/tasks/<id>/`; артефакты коммитятся с задачей/спринтом,
-  а не остаются только локально.
-- Чужие task-папки, старые спринты и закрытые changes — если нет
-  cross-task контракта или расследования регрессии.
-- Копии метрик, размеров, API и сгенерированных данных. Читай источник и
-  команду, которой он получен.
+- `events.jsonl` как нарратив — только `tail`/`grep` по событию.
+- Весь репозиторий, чужие task-папки, старые спринты и `/tmp`/чат — не
+  контекст; durable-путь только `.scrum/sprints/NN/tasks/<id>/`.
+- Копии метрик, размеров, API и сгенерированных данных — читай источник.
 
 ## Progressive disclosure
 
@@ -102,20 +73,9 @@ AGENTS.md                                  проект: правила, ком�
 
 ## Контекстный пакет (brief)
 
-Бриф — не «описание задачи», а пакет с фиксированными полями:
-
-- **objective** — один проверяемый результат;
-- **AC** — наблюдаемые условия, включая ошибку/край;
-- **owns** — пути, которые можно менять;
-- **контракты** — типы, схема, OpenAPI, зависимости;
-- **non-goals** — что явно не делаем;
-- **output format** — куда писать `report.md`, `handoff.md`, `evidence/`;
-- **tools/sources** — разрешённые команды и 3–5 ссылок;
-- **evidence** — какие команды/тесты/артефакты доказывают AC;
-- **stop conditions** — когда остановиться и спросить;
-- **read-back** — «Понял: … Делаю: … Не трогаю: …» до первой правки.
-
-Шаблон — `assets/brief.md`. Без read-back задача не начата.
+Фиксированные поля и шаблон — `assets/brief.md`: objective, AC, owns,
+контракты, non-goals, output format, tools/sources, evidence, stop
+conditions, read-back. Без read-back задача не начата.
 
 ## Пример: ответ за 3 ссылки
 

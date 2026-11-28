@@ -6,14 +6,10 @@
 
 `.scrum/sprints/NN/sprint.md` по шаблону `assets/sprint.md`.
 
-Обязательно: цель одной фразой, задачи-чекбоксы, `Change:` для
-behavior-changing PBI, `owns:`, evidence, trace-таблица
-`task → change → PR → review → evidence → status`, «Проверка владельцем»,
-риски, «Ход фаз», итоги.
-
-Рядом — `.scrum/README.md` (карта входа) и `tasks/<id>/` с brief/report/
-handoff/evidence. `docs/tasks/INDEX.md` ссылается на файл спринта; старые
-`docs/tasks/NN-*.md` остаются историей, новый канон — `.scrum/sprints/NN/`.
+Структура — `assets/sprint.md`: Goal, PBI, `Change:`, `owns:`, trace,
+гейты, риски, ход фаз, итоги. Рядом — `.scrum/README.md` и
+`tasks/<id>/` с brief/report/handoff/evidence. `INDEX.md` ссылается на
+файл спринта; старые `docs/tasks/NN-*.md` — история.
 
 После закрытия файл остаётся историей.
 

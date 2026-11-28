@@ -13,13 +13,8 @@
 
 ## Пять событий
 
-| Событие | Цель | Таймбокс |
-|---|---|---|
-| Sprint | контейнер | 4–6 циклов |
-| Planning | зачем, что, как | ≤ 15% |
-| Daily | сверить прогресс с Goal | ≤ 10 мин |
-| Review | показать инкремент | ≤ 10% |
-| Retro | улучшить процесс | ≤ 5% |
+Sprint, Planning, Daily, Review, Retro — цели, таймбоксы и шаги в
+`references/cycle.md`.
 
 ## Три артефакта
 
@@ -43,33 +38,17 @@ Sprint Backlog = Goal (why) + PBI (what) + план (how).
 
 ## Ready / Done
 
-- Ready: `docs/quality/dod.md`, `references/openspec.md`.
-- Done: `docs/quality/dod.md`.
-- Коротко: AC + e2e, тесты, typecheck/lint/build, security, a11y, perf,
-  observability, docs, OpenSpec archive, rollback, preview, ревью
-  не-автора.
+Ready/Done — `docs/quality/dod.md`; DoR/DoD OpenSpec — `references/openspec.md`.
 
 ## Ритм
 
-```
-цикл = 60–90 мин
-спринт = 4–6 циклов
-дейлик = 10 мин на границе цикла
-```
-
-Дейлик имеет смысл, только если между ним и предыдущим появился
-проверяемый шаг.
+Цикл 60–90 мин, спринт 4–6 циклов, дейлик 10 мин на границе цикла. Дейлик
+имеет смысл, только если появился проверяемый шаг.
 
 ## Метрики
 
-DORA: lead time, deployment frequency, recovery time, change fail rate,
-rework rate.
-Поток: cycle time, PR size, review latency, trunk red time, WIP, conflict
-rate.
-Качество: escaped defects, flaky rate, покрытие критических путей.
-Экономика: cost per merged task, ceremony %, human interventions.
-
-Story points и velocity — не цель.
+DORA, flow, quality и economy — `references/audit.md`. Story points и
+velocity — не цель.
 
 ## Антипаттерны
 

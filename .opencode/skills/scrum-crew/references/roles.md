@@ -624,10 +624,8 @@ root cause, proposal, owner и метрикой.
   обязательны, alert/RUM — исключение только до активации; после
   Q1.0–Q1.6 — блок; field RUM — исключение до публичного запуска.
 - Для T0 TDD/ATDD не требуются: только `verify`, ссылки и факты.
-- Drift: старые имена/пути, будущее как текущее (`status: plan`),
-  обещание теста без ссылки на тест, расхождение кода и чистовика.
-- В PR — правка host-файла или `No doc change: <причина>`; trace
-  task → change → PR → review → evidence полон.
+- Drift/док-чек — `assets/review.md`; отдельно: обещание теста = ссылка,
+  `No doc change`, trace task → change → PR → review → evidence.
 
 **DoD роли.** Каждый P1 имеет repro/доказательство; тест ловит регрессию;
 TDD/ATDD-evidence и T2-артефакты проверены; drift-проверка пройдена;
@@ -644,14 +642,9 @@ TDD/ATDD-evidence и T2-артефакты проверены; drift-прове�
 **Вход.** `.scrum/sprints/NN/tasks/<id>/brief.md`, role card, контракты,
 2–5 ссылок из брифа. Read-back до первой правки.
 
-**Выход.**
-- Код, тесты, PR.
-- `report.md` по `assets/report.md`: статус, AC/evidence, TDD/ATDD,
-  проверки, doc change/drift, блокеры.
-- `handoff.md` по `assets/handoff.md`: сделано, осталось, грабли,
-  открытые треды.
-- `evidence/`: команды, вывод, RED/GREEN, скриншоты, замеры.
-- Координатору — резюме ≤ 10 строк + ссылки, не весь отчёт.
+**Выход.** Код/тесты/PR; `report.md` по `assets/report.md`; `handoff.md`
+по `assets/handoff.md`; `evidence/` с командами, RED/GREEN и замерами.
+Координатору — резюме ≤ 10 строк + ссылки, не весь отчёт.
 
 **TDD.** Для T1/T2 сначала падающий тест на AC/дефект и ATDD-сценарий,
 затем минимальный код, затем refactor. Код до теста удаляется или

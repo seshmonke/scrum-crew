@@ -51,9 +51,8 @@ git worktree add .worktrees/task-42 -b task/42-checkout
 - Заголовок — поведение, не файлы.
 - В описании: task id, Tier, PBI/change, `openspec show <id> --diff`,
   ссылки на brief/report/evidence, что проверено, как откатить.
-- Doc change: правка host-файла или `No doc change: <причина>`.
-- Drift: нет старых имён, будущего как текущего, обещания теста без
-  ссылки на тест.
+- Doc change: правка host-файла или `No doc change: <причина>`;
+  drift-чек — `assets/review.md`.
 - < 400 строк; больше — только owner-approved исключение с причиной и
   сроком.
 - Автор не ревьюит себя; ревьюер — другая роль/модель.
@@ -112,9 +111,7 @@ archive, rollback, preview, ревью не-автора, живая прове�
 - [ ] P3 debt owner/срок; P0/P1 postmortem.
 - [ ] Review-артефакт содержит task id и PR; brief/report/evidence
       прочитаны, не логи.
-- [ ] Drift: старые имена, будущее как текущее, обещание теста = ссылка.
-- [ ] PR: host-doc обновлён или `No doc change: <причина>`.
-- [ ] Trace task → change → PR → review → evidence → status полон.
+- [ ] Drift/doc/trace — по `assets/review.md`.
 - [ ] Соответствует AC и спеке.
 - [ ] Нет ослабления тестов/CI.
 - [ ] Нет секретов и PII в логах.

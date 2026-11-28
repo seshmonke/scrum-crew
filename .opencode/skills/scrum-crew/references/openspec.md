@@ -42,21 +42,12 @@ openspec validate --all --strict
 
 ## Статус change
 
-Единый набор: `plan | active | done | superseded`.
-
-| Статус | Когда | Где виден |
-|---|---|---|
-| `plan` | proposal написан, DoR/apply ещё нет; не текущая правда | шапка `proposal.md`, sprint trace |
-| `active` | DoR пройден, идёт apply/PR | шапка `proposal.md`, board |
-| `done` | merge + archive; `specs/` обновлён | `changes/archive/`, sprint trace |
-| `superseded` | заменён другим change; ссылка на замену | `changes/archive/`, proposal |
-
-- `plan` → `active` переводит PR, который начинает реализацию; `done` —
-  после archive.
-- Статус change — один факт в `proposal.md`/архиве. `design.md`,
-  `tasks.md`, sprint trace и review ссылаются, не дублируют.
-- «current» в старых текстах = `active`; других значений не используем.
-- `active` change без task id, PR или review-артефакта — trace-разрыв.
+Общий протокол — `references/context.md`; для change:
+`plan` — proposal до DoR, не текущая правда; `active` — DoR/apply/PR;
+`done` — merge + archive; `superseded` — заменён, ссылка на замену.
+Статус — один факт в `proposal.md`/архиве; `design.md`, `tasks.md`,
+sprint trace и review ссылаются. `current` в старых текстах = `active`.
+`active` change без task id, PR или review-артефакта — trace-разрыв.
 
 ## Поток
 
@@ -123,13 +114,8 @@ openspec validate --all --strict
 
 ## Трассировка
 
-Одна строка на задачу в `sprint.md`:
-
-```markdown
-| Task | Change | PR | Review | Evidence | Archive |
-|---|---|---|---|---|---|
-| 03.2 | `03-checkout` | #118 | `reviews/03-03.2.md` | `tasks/03.2/evidence/` | `archive/2026-11-28-03-checkout` |
-```
+Trace-таблица — `assets/sprint.md`; одна строка на задачу, колонки
+task/brief/change/PR/review/evidence/status. Здесь не дублируй.
 
 - Один behavior-changing PBI — один change; несколько задач могут
   реализовывать один change, каждая со своим brief и task id.
@@ -140,17 +126,12 @@ openspec validate --all --strict
 
 ## Drift-проверка при ревью
 
-Проверять по конечному состоянию, не по «правильному пути»:
+Полный чек-лист — `assets/review.md`. В OpenSpec-ревью дополнительно:
 
-- [ ] Нет старых имён файлов, модулей, путей, API.
-- [ ] Доки не описывают будущее как текущее: плановое — `status: plan`,
-      а не present tense.
-- [ ] Обещание теста («покрыто unit-тестом») содержит ссылку на тест;
-      иначе это claim, а не факт.
-- [ ] Код и чистовик совпадают; статус `plan/active/done` не врёт.
-- [ ] Метрики, размеры, API и списки не скопированы — ссылка на источник.
-- [ ] В PR — правка host-файла или `No doc change: <причина>`.
-- [ ] Trace task → change → PR → review → evidence → status полон.
+- [ ] Статус `plan/active/done` не врёт; archived change не `active`.
+- [ ] Trace task → change → PR → review → archive полон.
+- [ ] `No spec change` имеет причину.
+- [ ] Доки не описывают будущее как текущее; обещание теста имеет ссылку.
 
 Drift-находка — P1/P2 с owner; на close не должно остаться unresolved.
 

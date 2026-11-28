@@ -4,7 +4,7 @@
 Одна команда, 12+ ролей, спринт 4–8 часов, OpenSpec для поведения,
 монорепозиторий, последовательный merge train.
 
-Статус: **v0.5.0**. Продукт и стек не входят — они определяются на стадии
+Статус: **v0.5.1**. Продукт и стек не входят — они определяются на стадии
 Init в каждом проекте.
 
 ## Что даёт
@@ -151,6 +151,7 @@ openspec init --tools opencode --scope project
 В OpenCode: команда «обнови скилл» → режим Upgrade. Подробная процедура —
 `.opencode/skills/scrum-crew/references/upgrade.md`; migration notes
 v0.4.0 → v0.5.0 — в `CHANGELOG.md` и разделе 9.1 `upgrade.md`.
+v0.5.1 — Raptor-рефакторинг без migration.
 
 Установленная версия — `.opencode/skills/scrum-crew/VERSION`. Установщик
 копирует скилл и агентов, но не трогает `.scrum/`, `openspec/`, `docs/`
@@ -187,7 +188,7 @@ v0.4.0 → v0.5.0 — в `CHANGELOG.md` и разделе 9.1 `upgrade.md`.
     scrum-methodology-auditor.md
 template/                  # каркас проекта для Init
   .scrum/README.md         # карта входа (INIT)
-docs/                      # дизайн методологии и 100 источников
+docs/                      # дизайн, SCHEME.md, RAPTOR-v0.5.md, 100 источников
 .scrum/                    # dry-run пример карты и task workspace
                            # (не ставится)
 install.ps1
@@ -205,6 +206,8 @@ Init → Sprint 1 → Review → Retro → Sprint 2 → …
 ```
 PLANNING → READY → BUILDING ⇄ BLOCKED → REVIEW → RETRO → CLOSED
 ```
+
+Схема работы — `docs/SCHEME.md`: вход, цикл, задача, артефакты, гейты.
 
 Гейт — команда + exit code + evidence. «Зелёно» без вывода не
 принимается.
@@ -300,6 +303,20 @@ drift, stale claims, rework из-за контекста; оценка — по 
 
 Масса почти не выросла, хотя добавлены Init и мета-аудит; SKILL и число
 шаблонов сокращены. Подробности — `docs/RAPTOR-SKILL.md`.
+
+### Линия v0.5: поколение 1 → 2
+
+| Метрика | v0.5.0 | v0.5.1 |
+|---|---:|---:|
+| Файлов в скилле | 24 | 24 |
+| Строк | 3645 | 3455 |
+| Слов | 17698 | 16512 |
+| SKILL.md | 343 | 271 |
+| References | 2623 | 2516 |
+| Assets | 679 | 668 |
+
+Поведение и гейты не менялись: сокращены дубли, добавлена схема
+`docs/SCHEME.md`. Подробности — `docs/RAPTOR-v0.5.md`.
 
 ## Ограничения
 

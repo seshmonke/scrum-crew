@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.5.1 — 2026-11-28
+
+- **Raptor-поколение 1 → 2:** полный проход по скиллу — требования →
+  удаление → упрощение → ускорение → автоматизация.
+- Сокращены дубли: `SKILL.md` 343 → 271 строка; `scrum.md` 86 → 65;
+  `context.md` 178 → 138; `openspec.md` 216 → 197; `orchestrator.md`
+  258 → 245. Всего скилл 3645 → 3455 строк, 17698 → 16512 слов.
+- У каждого факта снова один host-файл: карта — `assets/context.md`,
+  brief — `assets/brief.md`, trace — `assets/sprint.md`, drift —
+  `assets/review.md`, статусы — `references/context.md`.
+- Добавлена схема работы скилла — `docs/SCHEME.md`; отчёт Raptor —
+  `docs/RAPTOR-v0.5.md`.
+- Поведение, роли, цикл, гейты, OpenSpec и merge train не менялись.
+- Migration: не требуется; пути и статусы v0.5.0 сохранены.
+
 ## v0.5.0 — 2026-11-28
 
 - **Context/navigation layer:** `.scrum/README.md` — карта входа (phase,

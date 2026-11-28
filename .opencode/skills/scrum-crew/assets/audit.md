@@ -55,18 +55,9 @@ unresolved drift 0, stale claims 0 на close, rework из-за контекст
 
 ## Контекст и навигация
 
-- Discovery: агент нашёл `.scrum/README.md` и назвал phase/sprint/task с
-  первой попытки? Источник — read-back/транскрипты.
-- Activation: открыл brief + change + DoD до первой правки?
-- Efficiency: сколько файлов/токенов до первой правки; бриф ≤ 1 страницы;
-  резюме отчёта ≤ 10 строк.
-- Durable: brief/handoff/report/evidence в `tasks/<id>/`, не в `/tmp`.
-- Trace: task → change → PR → review → evidence → status.
-- Map freshness: README обновлялся на каждой границе фазы.
-- Drift/stale: старые имена, будущее как текущее, тест без ссылки,
-  скопированные метрики/API.
-- Rework из-за контекста: переделка из-за неверного brief/карты.
-- Оценка — по конечному состоянию и чекпоинтам, не по «правильному пути».
+Контекстные метрики — в таблице; источник — read-back/транскрипты,
+filesystem, README/state, reviews. Оценка — по конечному состоянию и
+чекпоинтам, не по «правильному пути».
 
 ## Находки
 
